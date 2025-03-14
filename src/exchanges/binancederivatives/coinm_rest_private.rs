@@ -1,9 +1,12 @@
 use std::error::Error;
+use async_trait::async_trait;
 use crate::exchanges::{ApiProcessor, binancecommon::BinanceApiProcessor};
+use crate::register_processor;
 
 #[derive(Default)]
 pub struct PrivateRest;
 
+#[async_trait]
 impl ApiProcessor for PrivateRest {
     async fn process_docs(&self) -> Result<(u32, String, String), Box<dyn Error>> {
         BinanceApiProcessor::process_docs(self).await
@@ -65,3 +68,6 @@ impl BinanceApiProcessor for PrivateRest {
     const OUTPUT_FILE: &'static str = "binance/derivatives/binance_derivatives_coinm_private_rest_api_docs.md";
     const TITLE: &'static str = "Binance Derivatives COINM Private REST API Documentation";
 }
+
+// Register this processor
+register_processor!("binance_derivatives_coinm_private", PrivateRest);

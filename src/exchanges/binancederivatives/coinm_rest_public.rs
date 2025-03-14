@@ -1,9 +1,12 @@
 use std::error::Error;
+use async_trait::async_trait;
 use crate::exchanges::{ApiProcessor, binancecommon::BinanceApiProcessor};
+use crate::register_processor;
 
 #[derive(Default)]
 pub struct PublicREST;
 
+#[async_trait]
 impl ApiProcessor for PublicREST {
     async fn process_docs(&self) -> Result<(u32, String, String), Box<dyn Error>> {
         BinanceApiProcessor::process_docs(self).await
@@ -51,3 +54,6 @@ impl BinanceApiProcessor for PublicREST {
     const OUTPUT_FILE: &'static str = "binance/derivatives/binance_derivatives_coinm_public_rest_api_docs.md";
     const TITLE: &'static str = "Binance Deriviates COINM Public REST API Documentation";
 }
+
+// Register this processor
+register_processor!("binance_derivatives_coinm_public", PublicREST);

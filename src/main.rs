@@ -1,40 +1,37 @@
 use std::error::Error;
+use clap::{Parser, ValueEnum};
 
 mod exchanges;
 mod utils;
 
-use exchanges::binancederivatives::coinm_rest_public::PublicREST;
-use exchanges::ApiProcessor;
-use exchanges::ApiProcessorType;
-use exchanges::binancederivatives::coinm_rest_private::PrivateRest;
-use exchanges::binancederivatives::binance_derivatives_usdm::BinanceDerivativesUSDM;
-use exchanges::binancespot::{
-    binance_spot_rest::BinanceSpotRest,
-    binance_spot_fix::BinanceSpotFix,
-    binance_spot_websocket::BinanceSpotWebSocket,
-    binance_spot_sbe::BinanceSpotSbe,
-};
+#[derive(Debug, Clone, ValueEnum)]
+enum Exchange {
+    BinanceSpot,
+    BinanceFutures,
+}
+
+#[derive(Parser, Debug)]
+#[command(author, version, about, long_about = None)]
+struct Args {
+    /// The exchange to generate API documentation for
+    #[arg(value_enum)]
+    exchange: Exchange,
+}
+
+// Define the structure to hold results
+struct ExchangeResult {
+    market: String,
+    filename: String,
+    timestamp: String,
+    tokens: u32,
+}
 
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn Error>> {
-    // Define the structure to hold results
-    struct ExchangeResult {
-        market: String,
-        filename: String,
-        timestamp: String,
-        tokens: u32,
-    }
+    let args = Args::parse();
 
-    // Create a vector of API processors
-    let processors = vec![
-        ApiProcessorType::SpotRest(BinanceSpotRest::default()),
-        ApiProcessorType::SpotFix(BinanceSpotFix::default()),
-        ApiProcessorType::SpotWebSocket(BinanceSpotWebSocket::default()),
-        ApiProcessorType::SpotSbe(BinanceSpotSbe::default()),
-        ApiProcessorType::DerivativesUSDM(BinanceDerivativesUSDM::default()),
-        ApiProcessorType::DerivativesCOINMPrivateRest(PrivateRest::default()),
-        ApiProcessorType::DerivativesCOINMPublicREST(PublicREST::default()),
-    ];
+    // Get processors based on exchange type
+    let processors = exchanges::create_processors_by_type(matches!(args.exchange, Exchange::BinanceSpot));
 
     // Process each exchange and collect results
     let mut results = Vec::new();

@@ -1,9 +1,12 @@
 use std::error::Error;
+use async_trait::async_trait;
 use crate::exchanges::{ApiProcessor, binancecommon::BinanceApiProcessor};
+use crate::register_processor;
 
 #[derive(Default)]
 pub struct BinanceSpotSbe;
 
+#[async_trait]
 impl ApiProcessor for BinanceSpotSbe {
     async fn process_docs(&self) -> Result<(u32, String, String), Box<dyn Error>> {
         BinanceApiProcessor::process_docs(self).await
@@ -25,4 +28,7 @@ impl BinanceApiProcessor for BinanceSpotSbe {
     const OUTPUT_FILE: &'static str = "binance/spot/binance_spot_sbe_api_docs.md";
     const TITLE: &'static str = "Binance Spot SBE API Documentation";
 }
+
+// Register this processor
+register_processor!("binance_spot_sbe", BinanceSpotSbe);
 

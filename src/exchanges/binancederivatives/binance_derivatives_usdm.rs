@@ -1,9 +1,11 @@
 use std::error::Error;
+use async_trait::async_trait;
 use crate::exchanges::{ApiProcessor, binancecommon::BinanceApiProcessor};
 
 #[derive(Default)]
 pub struct BinanceDerivativesUSDM;
 
+#[async_trait]
 impl ApiProcessor for BinanceDerivativesUSDM {
     async fn process_docs(&self) -> Result<(u32, String, String), Box<dyn Error>> {
         BinanceApiProcessor::process_docs(self).await

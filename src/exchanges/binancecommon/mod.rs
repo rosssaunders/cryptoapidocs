@@ -1,11 +1,13 @@
 pub mod doc_processor;
 
 use std::error::Error;
+use async_trait::async_trait;
 
 use doc_processor::DocProcessor;
 
 use super::ApiProcessor;
 
+#[async_trait]
 pub trait BinanceApiProcessor: ApiProcessor {
     const ENDPOINTS: &'static [&'static str];
     const OUTPUT_FILE: &'static str;
