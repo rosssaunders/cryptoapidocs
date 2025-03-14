@@ -19,4 +19,8 @@ pub trait BinanceApiProcessor: ApiProcessor {
         );
         doc_processor.process_docs().await
     }
+
+    fn get_output_filename(&self) -> String {
+        Self::OUTPUT_FILE.to_string()
+    }
 }

@@ -3,8 +3,11 @@ use std::error::Error;
 mod exchanges;
 mod utils;
 
-use exchanges::binancederivatives::binance_deriviatves_usdm::BinanceDerivativesUSDM;
+use exchanges::binancederivatives::coinm_rest_public::PublicREST;
 use exchanges::ApiProcessor;
+use exchanges::ApiProcessorType;
+use exchanges::binancederivatives::coinm_rest_private::PrivateRest;
+use exchanges::binancederivatives::binance_derivatives_usdm::BinanceDerivativesUSDM;
 use exchanges::binancespot::{
     binance_spot_rest::BinanceSpotRest,
     binance_spot_fix::BinanceSpotFix,
@@ -14,31 +17,50 @@ use exchanges::binancespot::{
 
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn Error>> {
-    // Collect all results first
-    // let rest_result = BinanceSpotRest::default().process_docs().await?;
-    // let fix_result = BinanceSpotFix::default().process_docs().await?;
-    // let websocket_result = BinanceSpotWebSocket::default().process_docs().await?;
-    // let sbe_result = BinanceSpotSbe::default().process_docs().await?;
-    let usdm_result = BinanceDerivativesUSDM::default().process_docs().await?;
+    // Define the structure to hold results
+    struct ExchangeResult {
+        market: String,
+        filename: String,
+        timestamp: String,
+        tokens: u32,
+    }
+
+    // Create a vector of API processors
+    let processors = vec![
+        ApiProcessorType::SpotRest(BinanceSpotRest::default()),
+        ApiProcessorType::SpotFix(BinanceSpotFix::default()),
+        ApiProcessorType::SpotWebSocket(BinanceSpotWebSocket::default()),
+        ApiProcessorType::SpotSbe(BinanceSpotSbe::default()),
+        ApiProcessorType::DerivativesUSDM(BinanceDerivativesUSDM::default()),
+        ApiProcessorType::DerivativesCOINMPrivateRest(PrivateRest::default()),
+        ApiProcessorType::DerivativesCOINMPublicREST(PublicREST::default()),
+    ];
+
+    // Process each exchange and collect results
+    let mut results = Vec::new();
+    for processor in processors {
+        let (tokens, timestamp, market) = processor.process_docs().await?;
+        results.push(ExchangeResult {
+            market,
+            filename: processor.get_output_filename(),
+            timestamp,
+            tokens,
+        });
+    }
     
-    // Print the table at the end
+    // Print the table header
     println!("\n| Market | Generated File | Timestamp | Token Count |");
     println!("|--------|----------------|-----------|-------------|");
     
-    // let (tokens, timestamp, market) = rest_result;
-    // println!("| {} | binance_spot_rest_api_docs.md | {} | {} |", market, timestamp, tokens);
-    
-    // let (tokens, timestamp, market) = fix_result;
-    // println!("| {} | binance_spot_fix_api_docs.md | {} | {} |", market, timestamp, tokens);
-    
-    // let (tokens, timestamp, market) = websocket_result;
-    // println!("| {} | binance_spot_websocket_api_docs.md | {} | {} |", market, timestamp, tokens);
-    
-    // let (tokens, timestamp, market) = sbe_result;
-    // println!("| {} | binance_spot_sbe_api_docs.md | {} | {} |", market, timestamp, tokens);
+    // Print all results
+    for result in results {
+        println!("| {} | {} | {} | {} |", 
+            result.market, 
+            result.filename, 
+            result.timestamp, 
+            result.tokens
+        );
+    }
 
-    let (tokens, timestamp, market) = usdm_result;
-    println!("| {} | binance_deriviatves_usdm_api_docs.md | {} | {} |", market, timestamp, tokens);
-    
     Ok(())
 }

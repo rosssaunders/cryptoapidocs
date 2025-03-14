@@ -8,6 +8,10 @@ impl ApiProcessor for BinanceSpotWebSocket {
     async fn process_docs(&self) -> Result<(u32, String, String), Box<dyn Error>> {
         BinanceApiProcessor::process_docs(self).await
     }
+
+    fn get_output_filename(&self) -> String {
+        BinanceApiProcessor::get_output_filename(self)
+    }
 }
 
 impl BinanceApiProcessor for BinanceSpotWebSocket {
