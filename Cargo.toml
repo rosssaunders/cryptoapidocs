@@ -14,3 +14,7 @@ clap = { version = "4.5.1", features = ["derive"] }
 inventory = "0.3"
 once_cell = "1.19"
 async-trait = "0.1"
+cryptoapidocs-macros = { path = "./cryptoapidocs-macros" }
+
+[workspace]
+members = ["cryptoapidocs-macros"]

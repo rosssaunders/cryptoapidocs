@@ -1,22 +1,30 @@
 use std::error::Error;
 use async_trait::async_trait;
-use crate::exchanges::{ApiProcessor, binancecommon::BinanceApiProcessor};
+use crate::exchanges::ApiProcessor;
+use crate::exchanges::doc_processor::DocProcessor;
+use cryptoapidocs_macros::ProcessorRegistration;
 
-#[derive(Default)]
-pub struct BinanceDerivativesUSDM;
+#[derive(Default, ProcessorRegistration)]
+#[processor("binance_derivatives_usdm_private")]
+pub struct PrivateREST;
 
 #[async_trait]
-impl ApiProcessor for BinanceDerivativesUSDM {
+impl ApiProcessor for PrivateREST {
     async fn process_docs(&self) -> Result<(u32, String, String), Box<dyn Error>> {
-        BinanceApiProcessor::process_docs(self).await
+        let processor = DocProcessor::new(
+            Self::ENDPOINTS,
+            Self::OUTPUT_FILE,
+            Self::TITLE
+        );
+        processor.process_docs().await
     }
 
     fn get_output_filename(&self) -> String {
-        BinanceApiProcessor::get_output_filename(self)
+        String::from(Self::OUTPUT_FILE)
     }
 }
 
-impl BinanceApiProcessor for BinanceDerivativesUSDM {
+impl PrivateREST {
     const ENDPOINTS: &'static [&'static str] = &[
         "derivatives/quick-start",
         "derivatives/usds-margined-futures/general-info",

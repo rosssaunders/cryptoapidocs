@@ -17,19 +17,6 @@ inventory::collect!(ProcessorRegistration);
 // Global registry that will be lazily initialized
 static REGISTRY: OnceLock<HashMap<&'static str, fn() -> Box<dyn ApiProcessor + Send + Sync>>> = OnceLock::new();
 
-// Helper macro to register a processor
-#[macro_export]
-macro_rules! register_processor {
-    ($name:expr, $processor:ty) => {
-        inventory::submit! {
-            $crate::exchanges::processor_registry::ProcessorRegistration {
-                name: $name,
-                create_fn: || Box::new(<$processor>::default()),
-            }
-        }
-    };
-}
-
 // Initialize the registry from inventory items
 fn init_registry() -> HashMap<&'static str, fn() -> Box<dyn ApiProcessor + Send + Sync>> {
     let mut map = HashMap::new();
@@ -42,16 +29,6 @@ fn init_registry() -> HashMap<&'static str, fn() -> Box<dyn ApiProcessor + Send 
 // Get the global registry, initializing it if needed
 pub fn get_registry() -> &'static HashMap<&'static str, fn() -> Box<dyn ApiProcessor + Send + Sync>> {
     REGISTRY.get_or_init(init_registry)
-}
-
-// Function to create a processor by name
-pub fn create_processor(name: &str) -> Option<Box<dyn ApiProcessor + Send + Sync>> {
-    get_registry().get(name).map(|create_fn| create_fn())
-}
-
-// Function to get all registered processor names
-pub fn get_registered_processor_names() -> Vec<&'static str> {
-    get_registry().keys().copied().collect()
 }
 
 // Function to create all processors of a specific type (spot or futures)

@@ -1,23 +1,30 @@
 use std::error::Error;
 use async_trait::async_trait;
-use crate::exchanges::{ApiProcessor, binancecommon::BinanceApiProcessor};
-use crate::register_processor;
+use crate::exchanges::ApiProcessor;
+use crate::exchanges::doc_processor::DocProcessor;
+use cryptoapidocs_macros::ProcessorRegistration;
 
-#[derive(Default)]
+#[derive(Default, ProcessorRegistration)]
+#[processor("binance_spot_rest")]
 pub struct BinanceSpotRest;
 
 #[async_trait]
 impl ApiProcessor for BinanceSpotRest {
     async fn process_docs(&self) -> Result<(u32, String, String), Box<dyn Error>> {
-        BinanceApiProcessor::process_docs(self).await
+        let processor = DocProcessor::new(
+            Self::ENDPOINTS,
+            Self::OUTPUT_FILE,
+            Self::TITLE
+        );
+        processor.process_docs().await
     }
 
     fn get_output_filename(&self) -> String {
-        BinanceApiProcessor::get_output_filename(self)
+        String::from(Self::OUTPUT_FILE)
     }
 }
 
-impl BinanceApiProcessor for BinanceSpotRest {
+impl BinanceSpotRest {
     const ENDPOINTS: &'static [&'static str] = &[
         "binance-spot-api-docs/filters",
         "binance-spot-api-docs/enums",
@@ -40,6 +47,3 @@ impl BinanceApiProcessor for BinanceSpotRest {
     const OUTPUT_FILE: &'static str = "binance/spot/binance_spot_rest_api_docs.md";
     const TITLE: &'static str = "Binance Spot REST API Documentation";
 }
-
-// Register this processor
-register_processor!("binance_spot_rest", BinanceSpotRest);

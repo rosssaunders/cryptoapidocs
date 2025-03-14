@@ -311,6 +311,7 @@ dependencies = [
  "async-trait",
  "chrono",
  "clap",
+ "cryptoapidocs-macros",
  "html2md",
  "inventory",
  "once_cell",
@@ -318,6 +319,15 @@ dependencies = [
  "scraper",
  "tiktoken-rs",
  "tokio",
+]
+
+[[package]]
+name = "cryptoapidocs-macros"
+version = "0.1.0"
+dependencies = [
+ "proc-macro2",
+ "quote",
+ "syn",
 ]
 
 [[package]]
