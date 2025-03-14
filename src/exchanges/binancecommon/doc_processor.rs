@@ -7,7 +7,7 @@ use html2md;
 use crate::utils::token_counter::token_count_4o;
 use chrono::Utc;
 
-const BASE_URL: &str = "https://developers.binance.com/docs/binance-spot-api-docs";
+const BASE_URL: &str = "https://developers.binance.com/docs";
 
 pub struct DocProcessor {
     endpoints: &'static [&'static str],
@@ -28,9 +28,10 @@ impl DocProcessor {
         println!("Downloading Binance API Documentation HTML files...");
         
         let mut all_markdown = String::from(format!("# {}\n\n", self.title));
-        
         for &endpoint in self.endpoints {
+
             let full_url = format!("{}/{}", BASE_URL, endpoint);
+
             println!("Processing: {}", full_url);
             if let Ok(html) = fetch_page(&full_url).await {
                 let title = endpoint
@@ -47,7 +48,9 @@ impl DocProcessor {
         }
         
         let output_path = format!("docs/{}", self.output_file);
-        std::fs::create_dir_all("docs")?;
+        let dir_path = std::path::Path::new(&output_path).parent().unwrap_or_else(|| std::path::Path::new(""));
+
+        std::fs::create_dir_all(&dir_path)?;
         let mut file = File::create(&output_path)?;
         file.write_all(all_markdown.as_bytes())?;
         
@@ -74,4 +77,4 @@ fn extract_content(html: &str) -> String {
     } else {
         String::from("Content not found.")
     }
-} 
+}
