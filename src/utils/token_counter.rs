@@ -1,8 +1,7 @@
 use std::fs;
 
-pub fn token_count_4o() {
+pub fn token_count_4o(filepath: &str) -> u32 {
     // Step 1: Load the Markdown file
-    let filepath = "/Users/rosssaunders/DevDrive/cryptoapidocs/binance_spot_rest_api_docs.md";
     let content = fs::read_to_string(filepath).expect("Failed to read the file");
 
     use tiktoken_rs::o200k_base;
@@ -12,4 +11,5 @@ pub fn token_count_4o() {
         &content
     );
     println!("Token count: {}", tokens.len());
+    tokens.len() as u32
 }
