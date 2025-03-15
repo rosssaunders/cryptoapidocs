@@ -21,3 +21,10 @@ LLM friendly versions of Crypto Exchange Documentation. Each file is designed to
 ## Contributing
 
 Feel free to submit PRs for missing crypto venues or endpoints.
+
+## Integration into Cursor
+
+Adding each Doc into Cursor is currently a manual process and is unfortunately time consuming. There is an open feature request for this which 
+is tracked here: https://forum.cursor.com/t/feature-request-bulk-documentation-import-for-cursor-ai/47539
+
+Once this feature is available in Cursor, I'll add support for adding the docs into this repo.
