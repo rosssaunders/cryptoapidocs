@@ -1,4 +1,4 @@
-# Binance Derivatives USDM REST API Documentation
+# Binance USDM REST API Documentation
 
 ## QUICK START
 

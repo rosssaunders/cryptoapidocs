@@ -76,5 +76,5 @@ impl PrivateREST {
     ];
 
     const OUTPUT_FILE: &'static str = "binance/coinm/private_rest_api.md";
-    const TITLE: &'static str = "Binance Derivatives COIN-M Private REST API Documentation";
+    const TITLE: &'static str = "Binance COIN-M Private REST API Documentation";
 }
