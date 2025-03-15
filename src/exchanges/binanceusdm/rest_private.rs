@@ -93,5 +93,5 @@ impl PrivateREST {
     ];
 
     const OUTPUT_FILE: &'static str = "binance/usdm/private_rest_api.md";
-    const TITLE: &'static str = "Binance USDM REST API Documentation";
+    const TITLE: &'static str = "Binance USDM Private REST API Documentation";
 }

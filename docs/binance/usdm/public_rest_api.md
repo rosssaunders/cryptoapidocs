@@ -1,4 +1,4 @@
-# Binance USDM REST API Documentation
+# Binance USDM Public REST API Documentation
 
 ## QUICK START
 

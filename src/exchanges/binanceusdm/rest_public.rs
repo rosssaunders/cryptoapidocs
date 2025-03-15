@@ -65,5 +65,5 @@ impl PublicREST {
     ];
 
     const OUTPUT_FILE: &'static str = "binance/usdm/public_rest_api.md";
-    const TITLE: &'static str = "Binance USDM REST API Documentation";
+    const TITLE: &'static str = "Binance USDM Public REST API Documentation";
 }
