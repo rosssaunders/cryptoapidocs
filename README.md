@@ -6,18 +6,29 @@ LLM friendly versions of Crypto Exchange Documentation. Each file is designed to
 
 ## Docs
 
-| Exchange | API Type | Documentation | Last Updated | Token Count |
-|----------|----------|---------------|-------------|-------------|
-| Binance Spot | Private REST | [Private REST API Docs](docs/binance/spot/private_rest_api.md) | 2025-03-14 | 47464 |
-| Binance Spot | Public REST | [Public REST API Docs](docs/binance/spot/public_rest_api.md) | 2025-03-14 | 27153 |
-| Binance Spot | FIX | [FIX API Docs](docs/binance/spot/fix_api.md) | 2025-03-14 | 28603 |
-| Binance Spot | Private WebSocket | [Private WebSocket API Docs](docs/binance/spot/private_websocket_api.md) | 2025-03-14 | 80754 |
-| Binance Spot | Market Data SBE | [SBE API Docs](docs/binance/spot/market_data_sbe_api.md) | 2025-03-14 | 1262 |
-| Binance USDM | Private REST | [Private REST Docs](docs/binance/usdm/private_rest_api.md) | 2025-03-14 | 61394 |
-| Binance USDM | Public REST | [Public REST Docs](docs/binance/usdm/public_rest_api.md) | 2025-03-14 | 34593 |
-| Binance CoinM | Private REST | [Private REST Docs](docs/binance/coinm/private_rest_api.md) | 2025-03-14 | 40211 |
-| Binance Coinm | Public REST | [Public REST Docs](docs/binance/coinm/public_rest_api.md) | 2025-03-14 | 29990 |
+| Exchange | API Type | Documentation | Last Updated |
+|----------|----------|---------------|-------------|
+| Binance Spot | Private REST | [Private REST API Docs](docs/binance/spot/private_rest_api.md) | 2025-03-14 |
+| Binance Spot | Public REST | [Public REST API Docs](docs/binance/spot/public_rest_api.md) | 2025-03-14 |
+| Binance Spot | FIX | [FIX API Docs](docs/binance/spot/fix_api.md) | 2025-03-14 |
+| Binance Spot | Private WebSocket | [Private WebSocket API Docs](docs/binance/spot/private_websocket_api.md) | 2025-03-14 |
+| Binance Spot | Market Data SBE | [SBE API Docs](docs/binance/spot/market_data_sbe_api.md) | 2025-03-14 |
+| Binance USDM | Private REST | [Private REST Docs](docs/binance/usdm/private_rest_api.md) | 2025-03-14 |
+| Binance USDM | Public REST | [Public REST Docs](docs/binance/usdm/public_rest_api.md) | 2025-03-14 |
+| Binance USDM | Private WebSocket | [Private WebSocket Docs](docs/binance/usdm/private_websocket_api.md) | 2025-03-15 |
+| Binance USDM | Public WebSocket | [Public WebSocket Docs](docs/binance/usdm/public_websocket_api.md) | 2025-03-15 |
+| Binance CoinM | Private REST | [Private REST Docs](docs/binance/coinm/private_rest_api.md) | 2025-03-14 |
+| Binance CoinM | Public REST | [Public REST Docs](docs/binance/coinm/public_rest_api.md) | 2025-03-14 |
+| Binance CoinM | Private WebSocket | [Private WebSocket Docs](docs/binance/coinm/private_websocket_api.md) | 2025-03-15 |
+| Binance CoinM | Public WebSocket | [Public WebSocket Docs](docs/binance/coinm/public_websocket_api.md) | 2025-03-15 |
 
 ## Contributing
 
 Feel free to submit PRs for missing crypto venues or endpoints.
+
+## Integration into Cursor
+
+Adding each Doc into Cursor is currently a manual process and is unfortunately time consuming. There is an open feature request for this which 
+is tracked here: https://forum.cursor.com/t/feature-request-bulk-documentation-import-for-cursor-ai/47539
+
+Once this feature is available in Cursor, I'll add support for adding the docs into this repo.

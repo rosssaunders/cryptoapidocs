@@ -61,5 +61,5 @@ impl PublicREST {
     ];
 
     const OUTPUT_FILE: &'static str = "binance/coinm/public_rest_api.md";
-    const TITLE: &'static str = "Binance Derivatives COIN-M Public REST API Documentation";
+    const TITLE: &'static str = "Binance COIN-M Public REST API Documentation";
 }
