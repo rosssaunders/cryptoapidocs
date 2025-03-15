@@ -29,6 +29,7 @@ impl PrivateREST {
     const ENDPOINTS: &'static [&'static str] = &[
         "binance-spot-api-docs/filters",
         "binance-spot-api-docs/enums",
+        "binance-spot-api-docs/errors",
         "binance-spot-api-docs/rest-api/general-api-information",
         "binance-spot-api-docs/rest-api/http-return-codes",
         "binance-spot-api-docs/rest-api/error-codes",
@@ -39,9 +40,8 @@ impl PrivateREST {
         "binance-spot-api-docs/rest-api/general-endpoints",
         "binance-spot-api-docs/rest-api/trading-endpoints",
         "binance-spot-api-docs/rest-api/account-endpoints",
-        "binance-spot-api-docs/rest-api/user-data-stream",
+        "binance-spot-api-docs/user-data-stream",
         "binance-spot-api-docs/rest-api/user-data-stream-endpoints",
-        "binance-spot-api-docs/rest-api/errors",
     ];
 
     const OUTPUT_FILE: &'static str = "binance/spot/private_rest_api.md";

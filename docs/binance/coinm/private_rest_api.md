@@ -2199,42 +2199,57 @@ Response Example[​](/docs/derivatives/coin-margined-futures/trade/rest-api/Acc
 [	{		'symbol': 'BTCUSD_200626',	  	'id': 6,	  	'orderId': 28,	  	'pair': 'BTCUSD',	  	'side': 'SELL',	  	'price': '8800',	  	'qty': '1',	  	'realizedPnl': '0',	  	'marginAsset': 'BTC',	  	'baseQty': '0.01136364',	  	'commission': '0.00000454',	  	'commissionAsset': 'BTC',	  	'time': 1590743483586,	  	'positionSide': 'BOTH',	  	'buyer': false,	  	'maker': false	}]
 ```
 
-## CHANGE MARGIN TYPE
+## POSITION INFORMATION
 
-Change Margin Type (TRADE)
+Position Information(USER\_DATA)
 ==========
 
-API Description[​](/docs/derivatives/coin-margined-futures/trade/rest-api/Change-Margin-Type#api-description)
+API Description[​](/docs/derivatives/coin-margined-futures/trade/rest-api/Position-Information#api-description)
 ----------
 
-Change user's margin type in the specific symbol market.For Hedge Mode, LONG and SHORT positions of one symbol use the same margin type.  
-With ISOLATED margin type, margins of the LONG and SHORT positions are isolated from each other.
+Get current account information.
 
-HTTP Request[​](/docs/derivatives/coin-margined-futures/trade/rest-api/Change-Margin-Type#http-request)
+HTTP Request[​](/docs/derivatives/coin-margined-futures/trade/rest-api/Position-Information#http-request)
 ----------
 
-POST `/dapi/v1/marginType`
+GET `/dapi/v1/positionRisk`
 
-Request Weight[​](/docs/derivatives/coin-margined-futures/trade/rest-api/Change-Margin-Type#request-weight)
+Request Weight[​](/docs/derivatives/coin-margined-futures/trade/rest-api/Position-Information#request-weight)
 ----------
 
 **1**
 
-Request Parameters[​](/docs/derivatives/coin-margined-futures/trade/rest-api/Change-Margin-Type#request-parameters)
+Request Parameters[​](/docs/derivatives/coin-margined-futures/trade/rest-api/Position-Information#request-parameters)
 ----------
 
-|   Name   | Type |Mandatory|   Description   |
-|----------|------|---------|-----------------|
-|  symbol  |STRING|   YES   |                 |
-|marginType| ENUM |   YES   |ISOLATED, CROSSED|
-|recvWindow| LONG |   NO    |                 |
-|timestamp | LONG |   YES   |                 |
+|   Name    | Type |Mandatory|Description|
+|-----------|------|---------|-----------|
+|marginAsset|STRING|   NO    |           |
+|   pair    |STRING|   NO    |           |
+|recvWindow | LONG |   NO    |           |
+| timestamp | LONG |   YES   |           |
 
-Response Example[​](/docs/derivatives/coin-margined-futures/trade/rest-api/Change-Margin-Type#response-example)
+>
+>
+> * If neither `marginAsset` nor `pair` is sent, positions of all symbols with `TRADING` status will be returned.
+> * for One-way Mode user, the response will only show the "BOTH" positions
+> * for Hedge Mode user, the response will show "BOTH", "LONG", and "SHORT" positions.
+>
+>
+
+**Note**
+
+>
+>
+> Please use with user data stream `ACCOUNT_UPDATE` to meet your timeliness and accuracy needs.
+>
+>
+
+Response Example[​](/docs/derivatives/coin-margined-futures/trade/rest-api/Position-Information#response-example)
 ----------
 
 ```
-{	"code": 200,	"msg": "success"}
+[    {        "symbol": "BTCUSD_201225",        "positionAmt": "0",        "entryPrice": "0.0",        "breakEvenPrice": "0.0",  // break-even price        "markPrice": "0.00000000",        "unRealizedProfit": "0.00000000",        "liquidationPrice": "0",        "leverage": "125",        "maxQty": "50",  // maximum quantity of base asset        "marginType": "cross",        "isolatedMargin": "0.00000000",        "isAutoAddMargin": "false",        "positionSide": "BOTH",        "updateTime": 0    },    {        "symbol": "BTCUSD_201225",        "positionAmt": "1",        "entryPrice": "11707.70000003",        "breakEvenPrice": "11707.80000005",  // break-even price        "markPrice": "11788.66626667",        "unRealizedProfit": "0.00005866",        "liquidationPrice": "11667.63509587",        "leverage": "125",        "maxQty": "50",        "marginType": "cross",        "isolatedMargin": "0.00000000",        "isAutoAddMargin": "false",        "positionSide": "LONG",        "updateTime": 1627026881327     },    {        "symbol": "BTCUSD_201225",        "positionAmt": "0",        "entryPrice": "0.0",        "breakEvenPrice": "0.0",  // break-even price        "markPrice": "0.00000000",        "unRealizedProfit": "0.00000000",        "liquidationPrice": "0",        "leverage": "125",        "maxQty": "50",        "marginType": "cross",        "isolatedMargin": "0.00000000",        "isAutoAddMargin": "false",        "positionSide": "SHORT",        "updateTime":1627026881327  }]
 ```
 
 ## CHANGE POSITION MODE
@@ -2267,6 +2282,44 @@ Request Parameters[​](/docs/derivatives/coin-margined-futures/trade/rest-api/C
 |   timestamp    | LONG |   YES   |                                         |
 
 Response Example[​](/docs/derivatives/coin-margined-futures/trade/rest-api/Change-Position-Mode#response-example)
+----------
+
+```
+{	"code": 200,	"msg": "success"}
+```
+
+## CHANGE MARGIN TYPE
+
+Change Margin Type (TRADE)
+==========
+
+API Description[​](/docs/derivatives/coin-margined-futures/trade/rest-api/Change-Margin-Type#api-description)
+----------
+
+Change user's margin type in the specific symbol market.For Hedge Mode, LONG and SHORT positions of one symbol use the same margin type.  
+With ISOLATED margin type, margins of the LONG and SHORT positions are isolated from each other.
+
+HTTP Request[​](/docs/derivatives/coin-margined-futures/trade/rest-api/Change-Margin-Type#http-request)
+----------
+
+POST `/dapi/v1/marginType`
+
+Request Weight[​](/docs/derivatives/coin-margined-futures/trade/rest-api/Change-Margin-Type#request-weight)
+----------
+
+**1**
+
+Request Parameters[​](/docs/derivatives/coin-margined-futures/trade/rest-api/Change-Margin-Type#request-parameters)
+----------
+
+|   Name   | Type |Mandatory|   Description   |
+|----------|------|---------|-----------------|
+|  symbol  |STRING|   YES   |                 |
+|marginType| ENUM |   YES   |ISOLATED, CROSSED|
+|recvWindow| LONG |   NO    |                 |
+|timestamp | LONG |   YES   |                 |
+
+Response Example[​](/docs/derivatives/coin-margined-futures/trade/rest-api/Change-Margin-Type#response-example)
 ----------
 
 ```
@@ -2310,63 +2363,6 @@ Response Example[​](/docs/derivatives/coin-margined-futures/trade/rest-api/Cha
 ```
 { 	"leverage": 21, 	"maxQty": "1000",  // maximum quantity of base asset 	"symbol": "BTCUSD_200925"}
 ```
-
-## CHANGE MULTI ASSETS MODE
-
-Content not found.
-
-## MODIFY ISOLATED POSITION MARGIN
-
-Modify Isolated Position Margin(TRADE)
-==========
-
-API Description[​](/docs/derivatives/coin-margined-futures/trade/rest-api/Modify-Isolated-Position-Margin#api-description)
-----------
-
-Modify Isolated Position Margin
-
-HTTP Request[​](/docs/derivatives/coin-margined-futures/trade/rest-api/Modify-Isolated-Position-Margin#http-request)
-----------
-
-POST `/dapi/v1/positionMargin`
-
-Request Weight[​](/docs/derivatives/coin-margined-futures/trade/rest-api/Modify-Isolated-Position-Margin#request-weight)
-----------
-
-**1**
-
-Request Parameters[​](/docs/derivatives/coin-margined-futures/trade/rest-api/Modify-Isolated-Position-Margin#request-parameters)
-----------
-
-|    Name    | Type  |Mandatory|                                            Description                                             |
-|------------|-------|---------|----------------------------------------------------------------------------------------------------|
-|   symbol   |STRING |   YES   |                                                                                                    |
-|positionSide| ENUM  |   NO    |Default `BOTH` for One-way Mode ; `LONG` or `SHORT` for Hedge Mode. It must be sent with Hedge Mode.|
-|   amount   |DECIMAL|   YES   |                                                                                                    |
-|    type    |  INT  |   YES   |                          1: Add position margin,2: Reduce position margin                          |
-| recvWindow | LONG  |   NO    |                                                                                                    |
-| timestamp  | LONG  |   YES   |                                                                                                    |
-
->
->
-> * Only for isolated symbol
->
->
-
-Response Example[​](/docs/derivatives/coin-margined-futures/trade/rest-api/Modify-Isolated-Position-Margin#response-example)
-----------
-
-```
-{	"amount": 100.0,  	"code": 200,  	"msg": "Successfully modify position margin.",  	"type": 1}
-```
-
-## POSITION INFORMATION V2
-
-Content not found.
-
-## POSITION INFORMATION V3
-
-Content not found.
 
 ## POSITION ADL QUANTILE ESTIMATION
 
@@ -2417,6 +2413,51 @@ Response Example[​](/docs/derivatives/coin-margined-futures/trade/rest-api/Pos
 [	{		"symbol": "BTCUSD_200925", 		"adlQuantile": 			{				// if the positions of the symbol are crossed margined in Hedge Mode, "LONG" and "SHORT" will be returned a same quantile value, and "HEDGE" will be returned instead of "BOTH".				"LONG": 3,  				"SHORT": 3, 				"HEDGE": 0   // only a sign, ignore the value			}		}, 	{ 		"symbol": "BTCUSD_201225",  		"adlQuantile":  			{ 				// for positions of the symbol are in One-way Mode or isolated margined in Hedge Mode 				"LONG": 1, 	    // adl quantile for "LONG" position in hedge mode 				"SHORT": 2, 	// adl qauntile for "SHORT" position in hedge mode 				"BOTH": 0		// adl qunatile for position in one-way mode 			} 	} ]
 ```
 
+## MODIFY ISOLATED POSITION MARGIN
+
+Modify Isolated Position Margin(TRADE)
+==========
+
+API Description[​](/docs/derivatives/coin-margined-futures/trade/rest-api/Modify-Isolated-Position-Margin#api-description)
+----------
+
+Modify Isolated Position Margin
+
+HTTP Request[​](/docs/derivatives/coin-margined-futures/trade/rest-api/Modify-Isolated-Position-Margin#http-request)
+----------
+
+POST `/dapi/v1/positionMargin`
+
+Request Weight[​](/docs/derivatives/coin-margined-futures/trade/rest-api/Modify-Isolated-Position-Margin#request-weight)
+----------
+
+**1**
+
+Request Parameters[​](/docs/derivatives/coin-margined-futures/trade/rest-api/Modify-Isolated-Position-Margin#request-parameters)
+----------
+
+|    Name    | Type  |Mandatory|                                            Description                                             |
+|------------|-------|---------|----------------------------------------------------------------------------------------------------|
+|   symbol   |STRING |   YES   |                                                                                                    |
+|positionSide| ENUM  |   NO    |Default `BOTH` for One-way Mode ; `LONG` or `SHORT` for Hedge Mode. It must be sent with Hedge Mode.|
+|   amount   |DECIMAL|   YES   |                                                                                                    |
+|    type    |  INT  |   YES   |                          1: Add position margin,2: Reduce position margin                          |
+| recvWindow | LONG  |   NO    |                                                                                                    |
+| timestamp  | LONG  |   YES   |                                                                                                    |
+
+>
+>
+> * Only for isolated symbol
+>
+>
+
+Response Example[​](/docs/derivatives/coin-margined-futures/trade/rest-api/Modify-Isolated-Position-Margin#response-example)
+----------
+
+```
+{	"amount": 100.0,  	"code": 200,  	"msg": "Successfully modify position margin.",  	"type": 1}
+```
+
 ## GET POSITION MARGIN CHANGE HISTORY
 
 Get Position Margin Change History(TRADE)
@@ -2456,10 +2497,6 @@ Response Example[​](/docs/derivatives/coin-margined-futures/trade/rest-api/Get
 ```
 [	{		"amount": "23.36332311",	  	"asset": "BTC",	  	"symbol": "BTCUSD_200925",	  	"time": 1578047897183,	  	"type": 1,	  	"positionSide": "BOTH"	},	{		"amount": "100",	  	"asset": "BTC",	  	"symbol": "BTCUSD_200925",	  	"time": 1578047900425,	  	"type": 1,	  	"positionSide": "LONG"	}]
 ```
-
-## NEW ORDER TEST
-
-Content not found.
 
 ## REST API
 
@@ -2548,21 +2585,40 @@ Response Example[​](/docs/wallet/asset/user-universal-transfer#response-exampl
 {    "tranId":13526853623}
 ```
 
-## FUTURES ACCOUNT BALANCE V3
+## FUTURES ACCOUNT BALANCE
 
-Content not found.
+Futures Account Balance (USER\_DATA)
+==========
 
-## FUTURES ACCOUNT BALANCE V2
+API Description[​](/docs/derivatives/coin-margined-futures/account/rest-api/Futures-Account-Balance#api-description)
+----------
 
-Content not found.
+Check futures account balance
 
-## ACCOUNT INFORMATION V3
+HTTP Request[​](/docs/derivatives/coin-margined-futures/account/rest-api/Futures-Account-Balance#http-request)
+----------
 
-Content not found.
+GET `/dapi/v1/balance`
 
-## ACCOUNT INFORMATION V2
+Request Weight[​](/docs/derivatives/coin-margined-futures/account/rest-api/Futures-Account-Balance#request-weight)
+----------
 
-Content not found.
+**1**
+
+Request Parameters[​](/docs/derivatives/coin-margined-futures/account/rest-api/Futures-Account-Balance#request-parameters)
+----------
+
+|   Name   |Type|Mandatory|Description|
+|----------|----|---------|-----------|
+|recvWindow|LONG|   NO    |           |
+|timestamp |LONG|   YES   |           |
+
+Response Example[​](/docs/derivatives/coin-margined-futures/account/rest-api/Futures-Account-Balance#response-example)
+----------
+
+```
+[ 	{ 		"accountAlias": "SgsR",    // unique account code 		"asset": "BTC", 		"balance": "0.00250000", 		"withdrawAvailable": "0.00250000", 		"crossWalletBalance": "0.00241969",  		"crossUnPnl": "0.00000000",  		"availableBalance": "0.00241969", 		"updateTime": 1592468353979	}]
+```
 
 ## GET FUTURE ACCOUNT TRANSACTION HISTORY LIST
 
@@ -2607,25 +2663,121 @@ Response Example[​](/docs/derivatives/coin-margined-futures/account/rest-api/U
 {	"symbol": "BTCUSD_PERP",  	"makerCommissionRate": "0.00015",  // 0.015%  	"takerCommissionRate": "0.00040"   // 0.040%}
 ```
 
-## ACCOUNT CONFIG
+## ACCOUNT INFORMATION
 
-Content not found.
+Account Information (USER\_DATA)
+==========
 
-## SYMBOL CONFIG
+API Description[​](/docs/derivatives/coin-margined-futures/account/rest-api/Account-Information#api-description)
+----------
 
-Content not found.
+Get current account information.
 
-## QUERY RATE LIMIT
+HTTP Request[​](/docs/derivatives/coin-margined-futures/account/rest-api/Account-Information#http-request)
+----------
 
-Content not found.
+GET `/dapi/v1/account`
 
-## NOTIONAL AND LEVERAGE BRACKETS
+Request Weight[​](/docs/derivatives/coin-margined-futures/account/rest-api/Account-Information#request-weight)
+----------
 
-Content not found.
+**5**
 
-## GET CURRENT MULTI ASSETS MODE
+Request Parameters[​](/docs/derivatives/coin-margined-futures/account/rest-api/Account-Information#request-parameters)
+----------
 
-Content not found.
+|   Name   |Type|Mandatory|Description|
+|----------|----|---------|-----------|
+|recvWindow|LONG|   NO    |           |
+|timestamp |LONG|   YES   |           |
+
+>
+>
+> * for One-way Mode user, the "positions" will only show the "BOTH" positions
+> * for Hedge Mode user, the "positions" will show "BOTH", "LONG", and "SHORT" positions.
+>
+>
+
+Response Example[​](/docs/derivatives/coin-margined-futures/account/rest-api/Account-Information#response-example)
+----------
+
+```
+{	"assets": [		{			"asset": "BTC",  // asset name    			"walletBalance": "0.00241969",  // total wallet balance   			"unrealizedProfit": "0.00000000",  // unrealized profit or loss   			"marginBalance": "0.00241969",  // margin balance   			"maintMargin": "0.00000000",	// maintenance margin   			"initialMargin": "0.00000000",  // total intial margin required with the latest mark price   			"positionInitialMargin": "0.00000000",  // positions" margin required with the latest mark price   			"openOrderInitialMargin": "0.00000000",  // open orders" intial margin required with the latest mark price   			"maxWithdrawAmount": "0.00241969",  // available amount for transfer out   			"crossWalletBalance": "0.00241969",  // wallet balance for crossed margin   			"crossUnPnl": "0.00000000",  // total unrealized profit or loss of crossed positions   			"availableBalance": "0.00241969", // available margin balance			"updateTime": 1625474304765 //update time   		}	 ],	 "positions": [		 {		 	"symbol": "BTCUSD_201225",		 	"positionAmt":"0",	// position amount   			"initialMargin": "0",   			"maintMargin": "0",   			"unrealizedProfit": "0.00000000",   			"positionInitialMargin": "0",   			"openOrderInitialMargin": "0",   			"leverage": "125",   			"isolated": false,   			"positionSide": "BOTH", // BOTH means that it is the position of One-way Mode     			"entryPrice": "0.0",   			"breakEvenPrice": "0.0",  // break-even price   			"maxQty": "50",  // maximum quantity of base asset   			"updateTime": 0   		},  		{  			"symbol": "BTCUSD_201225",		 	"positionAmt":"0",   			"initialMargin": "0",   			"maintMargin": "0",   			"unrealizedProfit": "0.00000000",   			"positionInitialMargin": "0",   			"openOrderInitialMargin": "0",   			"leverage": "125",   			"isolated": false,   			"positionSide": "LONG",  // LONG or SHORT means that it is the position of Hedge Mode    			"entryPrice": "0.0",   			"breakEvenPrice": "0.0",  // break-even price   			"maxQty": "50",   			"updateTime": 0   		},  		{  			"symbol": "BTCUSD_201225",		 	"positionAmt":"0",   			"initialMargin": "0",   			"maintMargin": "0",   			"unrealizedProfit": "0.00000000",   			"positionInitialMargin": "0",   			"openOrderInitialMargin": "0",   			"leverage": "125",   			"isolated": false,   			"positionSide": "SHORT",  // LONG or SHORT means that it is the position of Hedge Mode    			"entryPrice": "0.0",   			"breakEvenPrice": "0.0",  // break-even price   			"maxQty": "50",			"notionalValue": "0",   			"updateTime":1627026881327   		}	 ],	 "canDeposit": true,	 "canTrade": true,	 "canWithdraw": true,	 "feeTier": 2,	 "updateTime": 0}
+```
+
+## NOTIONAL BRACKET FOR SYMBOL
+
+Notional Bracket for Symbol(USER\_DATA)
+==========
+
+API Description[​](/docs/derivatives/coin-margined-futures/account/rest-api/Notional-Bracket-for-Symbol#api-description)
+----------
+
+Get the symbol's notional bracket list.
+
+HTTP Request[​](/docs/derivatives/coin-margined-futures/account/rest-api/Notional-Bracket-for-Symbol#http-request)
+----------
+
+GET `/dapi/v2/leverageBracket`
+
+Request Weight[​](/docs/derivatives/coin-margined-futures/account/rest-api/Notional-Bracket-for-Symbol#request-weight)
+----------
+
+**1**
+
+Request Parameters[​](/docs/derivatives/coin-margined-futures/account/rest-api/Notional-Bracket-for-Symbol#request-parameters)
+----------
+
+|   Name   | Type |Mandatory|Description|
+|----------|------|---------|-----------|
+|  symbol  |STRING|   NO    |           |
+|recvWindow| LONG |   NO    |           |
+|timestamp | LONG |   YES   |           |
+
+Response Example[​](/docs/derivatives/coin-margined-futures/account/rest-api/Notional-Bracket-for-Symbol#response-example)
+----------
+
+```
+[    {        "symbol": "BTCUSD_PERP",        "notionalCoef": 1.50,  //user symbol bracket multiplier, only appears when user's symbol bracket is adjusted         "brackets": [            {                "bracket": 1,   // bracket level                "initialLeverage": 125,  // the maximum leverage                "qtyCap": 50,  // upper edge of base asset quantity                "qtylFloor": 0,  // lower edge of base asset quantity                "maintMarginRatio": 0.004 // maintenance margin rate				"cum": 0.0 // Auxiliary number for quick calculation             },        ]    }]
+```
+
+## NOTIONAL BRACKET FOR PAIR
+
+Notional Bracket for Pair(USER\_DATA)
+==========
+
+API Description[​](/docs/derivatives/coin-margined-futures/account/rest-api/Notional-Bracket-for-Pair#api-description)
+----------
+
+**Not recommended to continue using this v1 endpoint**
+
+Get the pair's default notional bracket list, may return ambiguous values when there have been multiple different `symbol` brackets under the `pair`, suggest using the following `GET /dapi/v2/leverageBracket` query instead to get the specific `symbol` notional bracket list.
+
+HTTP Request[​](/docs/derivatives/coin-margined-futures/account/rest-api/Notional-Bracket-for-Pair#http-request)
+----------
+
+GET `/dapi/v1/leverageBracket`
+
+Request Weight[​](/docs/derivatives/coin-margined-futures/account/rest-api/Notional-Bracket-for-Pair#request-weight)
+----------
+
+**1**
+
+Request Parameters[​](/docs/derivatives/coin-margined-futures/account/rest-api/Notional-Bracket-for-Pair#request-parameters)
+----------
+
+|   Name   | Type |Mandatory|Description|
+|----------|------|---------|-----------|
+|   pair   |STRING|   NO    |           |
+|recvWindow| LONG |   NO    |           |
+|timestamp | LONG |   YES   |           |
+
+Response Example[​](/docs/derivatives/coin-margined-futures/account/rest-api/Notional-Bracket-for-Pair#response-example)
+----------
+
+```
+[    {        "pair": "BTCUSD",        "brackets": [            {                "bracket": 1,   // bracket level                "initialLeverage": 125,  // the maximum leverage                "qtyCap": 50,  // upper edge of base asset quantity                "qtylFloor": 0,  // lower edge of base asset quantity                "maintMarginRatio": 0.004 // maintenance margin rate				"cum": 0.0  // Auxiliary number for quick calculation             },        ]    }]
+```
 
 ## GET CURRENT POSITION MODE
 
@@ -2710,10 +2862,6 @@ Response Example[​](/docs/derivatives/coin-margined-futures/account/rest-api/G
 ```
 [	{    	"symbol": "",				// trade symbol, if existing    	"incomeType": "TRANSFER",	// income type    	"income": "-0.37500000",	// income amount    	"asset": "BTC",				// income asset    	"info":"WITHDRAW",			// extra information    	"time": 1570608000000,    	"tranId":"9689322392",		// transaction id    	"tradeId":""				// trade id, if existing	},	{   		"symbol": "BTCUSD_200925",    	"incomeType": "COMMISSION",     	"income": "-0.01000000",    	"asset": "BTC",    	"info":"",    	"time": 1570636800000,    	"tranId":"9689322392",    	"tradeId":"2059192"	}]
 ```
-
-## FUTURES TRADING QUANTITATIVE RULES INDICATORS
-
-Content not found.
 
 ## GET DOWNLOAD ID FOR FUTURES TRANSACTION HISTORY
 
@@ -2817,27 +2965,27 @@ Response Example[​](/docs/derivatives/coin-margined-futures/account/rest-api/G
 {	"downloadId":"545923594199212032",  	"status":"processing",  	"url":"",   	"notified":false,  	"expirationTimestamp":-1  	"isExpired":null,  	}
 ```
 
-## GET DOWNLOAD ID FOR FUTURES ORDER HISTORY
+## GET DOWNLOAD ID FOR FUTURES TRANSACTION HISTORY
 
-Get Download Id For Futures Order History (USER\_DATA)
+Get Download Id For Futures Transaction History(USER\_DATA)
 ==========
 
-API Description[​](/docs/derivatives/coin-margined-futures/account/rest-api/Get-Download-Id-For-Futures-Order-History#api-description)
+API Description[​](/docs/derivatives/coin-margined-futures/account/rest-api/Get-Download-Id-For-Futures-Transaction-History#api-description)
 ----------
 
-Get Download Id For Futures Order History
+Get download id for futures transaction history
 
-HTTP Request[​](/docs/derivatives/coin-margined-futures/account/rest-api/Get-Download-Id-For-Futures-Order-History#http-request)
+HTTP Request[​](/docs/derivatives/coin-margined-futures/account/rest-api/Get-Download-Id-For-Futures-Transaction-History#http-request)
 ----------
 
-GET `/dapi/v1/order/asyn`
+GET `/dapi/v1/income/asyn`
 
-Request Weight[​](/docs/derivatives/coin-margined-futures/account/rest-api/Get-Download-Id-For-Futures-Order-History#request-weight)
+Request Weight[​](/docs/derivatives/coin-margined-futures/account/rest-api/Get-Download-Id-For-Futures-Transaction-History#request-weight)
 ----------
 
 **5**
 
-Request Parameters[​](/docs/derivatives/coin-margined-futures/account/rest-api/Get-Download-Id-For-Futures-Order-History#request-parameters)
+Request Parameters[​](/docs/derivatives/coin-margined-futures/account/rest-api/Get-Download-Id-For-Futures-Transaction-History#request-parameters)
 ----------
 
 |   Name   |Type|Mandatory|  Description  |
@@ -2849,12 +2997,12 @@ Request Parameters[​](/docs/derivatives/coin-margined-futures/account/rest-api
 
 >
 >
-> * Request Limitation is 10 times per month, shared by front end download page and rest api
+> * Request Limitation is 5 times per month, shared by front end download page and rest api
 > * The time between `startTime` and `endTime` can not be longer than 1 year
 >
 >
 
-Response Example[​](/docs/derivatives/coin-margined-futures/account/rest-api/Get-Download-Id-For-Futures-Order-History#response-example)
+Response Example[​](/docs/derivatives/coin-margined-futures/account/rest-api/Get-Download-Id-For-Futures-Transaction-History#response-example)
 ----------
 
 ```
@@ -3021,11 +3169,44 @@ Response Example[​](/docs/derivatives/coin-margined-futures/account/rest-api/G
 {	"downloadId":"545923594199212032",  	"status":"processing",  	"url":"",   	"notified":false,  	"expirationTimestamp":-1  	"isExpired":null,  	}
 ```
 
-## TOGGLE BNB BURN ON FUTURES TRADE
+## PORTFOLIO MARGIN ENDPOINTS
 
-Content not found.
+Classic Portfolio Margin Account Information (USER\_DATA)
+==========
 
-## GET BNB BURN STATUS
+API Description[​](/docs/derivatives/coin-margined-futures/portfolio-margin-endpoints#api-description)
+----------
 
-Content not found.
+Get Classic Portfolio Margin current account information.
+
+HTTP Request[​](/docs/derivatives/coin-margined-futures/portfolio-margin-endpoints#http-request)
+----------
+
+GET `/dapi/v1/pmAccountInfo`
+
+Request Weight(IP)[​](/docs/derivatives/coin-margined-futures/portfolio-margin-endpoints#request-weightip)
+----------
+
+**5**
+
+Request Parameters[​](/docs/derivatives/coin-margined-futures/portfolio-margin-endpoints#request-parameters)
+----------
+
+|   Name   | Type |Mandatory|Description|
+|----------|------|---------|-----------|
+|  asset   |STRING|   YES   |           |
+|recvWindow| LONG |   NO    |           |
+
+>
+>
+> * maxWithdrawAmount is for asset transfer out to the spot wallet.
+>
+>
+
+Response Example[​](/docs/derivatives/coin-margined-futures/portfolio-margin-endpoints#response-example)
+----------
+
+```
+{    "maxWithdrawAmountUSD": "25347.92083245",   // Classic Portfolio margin maximum virtual amount for transfer out in USD    "asset": "BTC",            // asset name    "maxWithdrawAmount": "1.33663654",        // maximum amount for transfer out}
+```
 

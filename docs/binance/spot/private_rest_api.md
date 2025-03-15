@@ -443,6 +443,473 @@ STP Modes[​](/docs/binance-spot-api-docs/enums#stp-modes)
 * `EXPIRE_TAKER`
 * `EXPIRE_BOTH`
 
+## ERRORS
+
+Error codes for Binance
+==========
+
+**Last Updated: 2025-01-09**
+
+Errors consist of two parts: an error code and a message. Codes are universal,
+but messages can vary. Here is the error JSON payload:
+
+```
+{  "code":-1121,  "msg":"Invalid symbol."}
+```
+
+10xx - General Server or Network issues[​](/docs/binance-spot-api-docs/errors#10xx---general-server-or-network-issues)
+----------
+
+### -1000 UNKNOWN[​](/docs/binance-spot-api-docs/errors#-1000-unknown) ###
+
+* An unknown error occurred while processing the request.
+
+### -1001 DISCONNECTED[​](/docs/binance-spot-api-docs/errors#-1001-disconnected) ###
+
+* Internal error; unable to process your request. Please try again.
+
+### -1002 UNAUTHORIZED[​](/docs/binance-spot-api-docs/errors#-1002-unauthorized) ###
+
+* You are not authorized to execute this request.
+
+### -1003 TOO\_MANY\_REQUESTS[​](/docs/binance-spot-api-docs/errors#-1003-too_many_requests) ###
+
+* Too many requests queued.
+* Too much request weight used; current limit is %s request weight per %s. Please use WebSocket Streams for live updates to avoid polling the API.
+* Way too much request weight used; IP banned until %s. Please use WebSocket Streams for live updates to avoid bans.
+
+### -1006 UNEXPECTED\_RESP[​](/docs/binance-spot-api-docs/errors#-1006-unexpected_resp) ###
+
+* An unexpected response was received from the message bus. Execution status unknown.
+
+### -1007 TIMEOUT[​](/docs/binance-spot-api-docs/errors#-1007-timeout) ###
+
+* Timeout waiting for response from backend server. Send status unknown; execution status unknown.
+
+### -1008 SERVER\_BUSY[​](/docs/binance-spot-api-docs/errors#-1008-server_busy) ###
+
+* Server is currently overloaded with other requests. Please try again in a few minutes.
+
+### -1013 INVALID\_MESSAGE[​](/docs/binance-spot-api-docs/errors#-1013-invalid_message) ###
+
+* The request is rejected by the API. (i.e. The request didn't reach the Matching Engine.)
+* Potential error messages can be found in [Filter Failures](/docs/binance-spot-api-docs/errors#filter-failures) or [Failures during order placement](/docs/binance-spot-api-docs/errors#other-errors).
+
+### -1014 UNKNOWN\_ORDER\_COMPOSITION[​](/docs/binance-spot-api-docs/errors#-1014-unknown_order_composition) ###
+
+* Unsupported order combination.
+
+### -1015 TOO\_MANY\_ORDERS[​](/docs/binance-spot-api-docs/errors#-1015-too_many_orders) ###
+
+* Too many new orders.
+* Too many new orders; current limit is %s orders per %s.
+
+### -1016 SERVICE\_SHUTTING\_DOWN[​](/docs/binance-spot-api-docs/errors#-1016-service_shutting_down) ###
+
+* This service is no longer available.
+
+### -1020 UNSUPPORTED\_OPERATION[​](/docs/binance-spot-api-docs/errors#-1020-unsupported_operation) ###
+
+* This operation is not supported.
+
+### -1021 INVALID\_TIMESTAMP[​](/docs/binance-spot-api-docs/errors#-1021-invalid_timestamp) ###
+
+* Timestamp for this request is outside of the recvWindow.
+* Timestamp for this request was 1000ms ahead of the server's time.
+
+### -1022 INVALID\_SIGNATURE[​](/docs/binance-spot-api-docs/errors#-1022-invalid_signature) ###
+
+* Signature for this request is not valid.
+
+11xx - Request issues[​](/docs/binance-spot-api-docs/errors#11xx---request-issues)
+----------
+
+### -1100 ILLEGAL\_CHARS[​](/docs/binance-spot-api-docs/errors#-1100-illegal_chars) ###
+
+* Illegal characters found in a parameter.
+* Illegal characters found in parameter '%s'; legal range is '%s'.
+
+### -1101 TOO\_MANY\_PARAMETERS[​](/docs/binance-spot-api-docs/errors#-1101-too_many_parameters) ###
+
+* Too many parameters sent for this endpoint.
+* Too many parameters; expected '%s' and received '%s'.
+* Duplicate values for a parameter detected.
+
+### -1102 MANDATORY\_PARAM\_EMPTY\_OR\_MALFORMED[​](/docs/binance-spot-api-docs/errors#-1102-mandatory_param_empty_or_malformed) ###
+
+* A mandatory parameter was not sent, was empty/null, or malformed.
+* Mandatory parameter '%s' was not sent, was empty/null, or malformed.
+* Param '%s' or '%s' must be sent, but both were empty/null!
+* '%s' contains unexpected value. Cannot be greater than '%s'.
+* Required tag '%s' missing.
+
+### -1103 UNKNOWN\_PARAM[​](/docs/binance-spot-api-docs/errors#-1103-unknown_param) ###
+
+* An unknown parameter was sent.
+
+### -1104 UNREAD\_PARAMETERS[​](/docs/binance-spot-api-docs/errors#-1104-unread_parameters) ###
+
+* Not all sent parameters were read.
+* Not all sent parameters were read; read '%s' parameter(s) but was sent '%s'.
+
+### -1105 PARAM\_EMPTY[​](/docs/binance-spot-api-docs/errors#-1105-param_empty) ###
+
+* A parameter was empty.
+* Parameter '%s' was empty.
+
+### -1106 PARAM\_NOT\_REQUIRED[​](/docs/binance-spot-api-docs/errors#-1106-param_not_required) ###
+
+* A parameter was sent when not required.
+* Parameter '%s' sent when not required.
+
+### -1108 PARAM\_OVERFLOW[​](/docs/binance-spot-api-docs/errors#-1108-param_overflow) ###
+
+* Parameter '%s' overflowed.
+
+### -1111 BAD\_PRECISION[​](/docs/binance-spot-api-docs/errors#-1111-bad_precision) ###
+
+* Parameter '%s' has too much precision.
+
+### -1112 NO\_DEPTH[​](/docs/binance-spot-api-docs/errors#-1112-no_depth) ###
+
+* No orders on book for symbol.
+
+### -1114 TIF\_NOT\_REQUIRED[​](/docs/binance-spot-api-docs/errors#-1114-tif_not_required) ###
+
+* TimeInForce parameter sent when not required.
+
+### -1115 INVALID\_TIF[​](/docs/binance-spot-api-docs/errors#-1115-invalid_tif) ###
+
+* Invalid timeInForce.
+
+### -1116 INVALID\_ORDER\_TYPE[​](/docs/binance-spot-api-docs/errors#-1116-invalid_order_type) ###
+
+* Invalid orderType.
+
+### -1117 INVALID\_SIDE[​](/docs/binance-spot-api-docs/errors#-1117-invalid_side) ###
+
+* Invalid side.
+
+### -1118 EMPTY\_NEW\_CL\_ORD\_ID[​](/docs/binance-spot-api-docs/errors#-1118-empty_new_cl_ord_id) ###
+
+* New client order ID was empty.
+
+### -1119 EMPTY\_ORG\_CL\_ORD\_ID[​](/docs/binance-spot-api-docs/errors#-1119-empty_org_cl_ord_id) ###
+
+* Original client order ID was empty.
+
+### -1120 BAD\_INTERVAL[​](/docs/binance-spot-api-docs/errors#-1120-bad_interval) ###
+
+* Invalid interval.
+
+### -1121 BAD\_SYMBOL[​](/docs/binance-spot-api-docs/errors#-1121-bad_symbol) ###
+
+* Invalid symbol.
+
+### -1122 INVALID\_SYMBOLSTATUS[​](/docs/binance-spot-api-docs/errors#-1122-invalid_symbolstatus) ###
+
+* Invalid symbolStatus.
+
+### -1125 INVALID\_LISTEN\_KEY[​](/docs/binance-spot-api-docs/errors#-1125-invalid_listen_key) ###
+
+* This listenKey does not exist.
+
+### -1127 MORE\_THAN\_XX\_HOURS[​](/docs/binance-spot-api-docs/errors#-1127-more_than_xx_hours) ###
+
+* Lookup interval is too big.
+* More than %s hours between startTime and endTime.
+
+### -1128 OPTIONAL\_PARAMS\_BAD\_COMBO[​](/docs/binance-spot-api-docs/errors#-1128-optional_params_bad_combo) ###
+
+* Combination of optional parameters invalid.
+* Fields [%s] must be sent together or omitted entirely.
+* Invalid 'MDEntryType (269)' combination. BID and OFFER must be requested together.
+
+### -1130 INVALID\_PARAMETER[​](/docs/binance-spot-api-docs/errors#-1130-invalid_parameter) ###
+
+* Invalid data sent for a parameter.
+* Data sent for parameter '%s' is not valid.
+
+### -1134 BAD\_STRATEGY\_TYPE[​](/docs/binance-spot-api-docs/errors#-1134-bad_strategy_type) ###
+
+* `strategyType` was less than 1000000.
+
+### -1135 INVALID\_JSON[​](/docs/binance-spot-api-docs/errors#-1135-invalid_json) ###
+
+* Invalid JSON Request
+* JSON sent for parameter '%s' is not valid
+
+### -1139 INVALID\_TICKER\_TYPE[​](/docs/binance-spot-api-docs/errors#-1139-invalid_ticker_type) ###
+
+* Invalid ticker type.
+
+### -1145 INVALID\_CANCEL\_RESTRICTIONS[​](/docs/binance-spot-api-docs/errors#-1145-invalid_cancel_restrictions) ###
+
+* `cancelRestrictions` has to be either `ONLY_NEW` or `ONLY_PARTIALLY_FILLED`.
+
+### -1151 DUPLICATE\_SYMBOLS[​](/docs/binance-spot-api-docs/errors#-1151-duplicate_symbols) ###
+
+* Symbol is present multiple times in the list.
+
+### -1152 INVALID\_SBE\_HEADER[​](/docs/binance-spot-api-docs/errors#-1152-invalid_sbe_header) ###
+
+* Invalid `X-MBX-SBE` header; expected `<SCHEMA_ID>:<VERSION>`.
+
+### -1153 UNSUPPORTED\_SCHEMA\_ID[​](/docs/binance-spot-api-docs/errors#-1153-unsupported_schema_id) ###
+
+* Unsupported SBE schema ID or version specified in the `X-MBX-SBE` header.
+
+### -1155 SBE\_DISABLED[​](/docs/binance-spot-api-docs/errors#-1155-sbe_disabled) ###
+
+* SBE is not enabled.
+
+### -1158 OCO\_ORDER\_TYPE\_REJECTED[​](/docs/binance-spot-api-docs/errors#-1158-oco_order_type_rejected) ###
+
+* Order type not supported in OCO.
+* If the order type provided in the `aboveType` and/or `belowType` is not supported.
+
+### -1160 OCO\_ICEBERGQTY\_TIMEINFORCE[​](/docs/binance-spot-api-docs/errors#-1160-oco_icebergqty_timeinforce) ###
+
+* Parameter '%s' is not supported if `aboveTimeInForce`/`belowTimeInForce` is not GTC.
+* If the order type for the above or below leg is `STOP_LOSS_LIMIT`, and `icebergQty` is provided for that leg, the `timeInForce` has to be `GTC` else it will throw an error.
+
+### -1161 DEPRECATED\_SCHEMA[​](/docs/binance-spot-api-docs/errors#-1161-deprecated_schema) ###
+
+* Unable to encode the response in SBE schema 'x'. Please use schema 'y' or higher.
+
+### -1165 BUY\_OCO\_LIMIT\_MUST\_BE\_BELOW[​](/docs/binance-spot-api-docs/errors#-1165-buy_oco_limit_must_be_below) ###
+
+* A limit order in a buy OCO must be below.
+
+### -1166 SELL\_OCO\_LIMIT\_MUST\_BE\_ABOVE[​](/docs/binance-spot-api-docs/errors#-1166-sell_oco_limit_must_be_above) ###
+
+* A limit order in a sell OCO must be above.
+
+### -1168 BOTH\_OCO\_ORDERS\_CANNOT\_BE\_LIMIT[​](/docs/binance-spot-api-docs/errors#-1168-both_oco_orders_cannot_be_limit) ###
+
+* At least one OCO order must be contingent.
+
+### -1169 INVALID\_TAG\_NUMBER[​](/docs/binance-spot-api-docs/errors#-1169-invalid_tag_number) ###
+
+* Invalid tag number.
+
+### -1170 TAG\_NOT\_DEFINED\_IN\_MESSAGE[​](/docs/binance-spot-api-docs/errors#-1170-tag_not_defined_in_message) ###
+
+* Tag '%s' not defined for this message type.
+
+### -1171 TAG\_APPEARS\_MORE\_THAN\_ONCE[​](/docs/binance-spot-api-docs/errors#-1171-tag_appears_more_than_once) ###
+
+* Tag '%s' appears more than once.
+
+### -1172 TAG\_OUT\_OF\_ORDER[​](/docs/binance-spot-api-docs/errors#-1172-tag_out_of_order) ###
+
+* Tag '%s' specified out of required order.
+
+### -1173 GROUP\_FIELDS\_OUT\_OF\_ORDER[​](/docs/binance-spot-api-docs/errors#-1173-group_fields_out_of_order) ###
+
+* Repeating group '%s' fields out of order.
+
+### -1174 INVALID\_COMPONENT[​](/docs/binance-spot-api-docs/errors#-1174-invalid_component) ###
+
+* Component '%s' is incorrectly populated on '%s' order. Recommendation: '%s'
+
+### -1175 RESET\_SEQ\_NUM\_SUPPORT[​](/docs/binance-spot-api-docs/errors#-1175-reset_seq_num_support) ###
+
+* Continuation of sequence numbers to new session is currently unsupported. Sequence numbers must be reset for each new session.
+
+### -1176 ALREADY\_LOGGED\_IN[​](/docs/binance-spot-api-docs/errors#-1176-already_logged_in) ###
+
+* [Logon`<A>`](/docs/binance-spot-api-docs/fix-api#logon-main) should only be sent once.
+
+### -1177 GARBLED\_MESSAGE[​](/docs/binance-spot-api-docs/errors#-1177-garbled_message) ###
+
+* `CheckSum(10)` contains an incorrect value.
+* `BeginString (8)` is not the first tag in a message.
+* `MsgType (35)` is not the third tag in a message.
+* `BodyLength (9)` does not contain the correct byte count.
+* Only printable ASCII characters and SOH (Start of Header) are allowed.
+
+### -1178 BAD\_SENDER\_COMPID[​](/docs/binance-spot-api-docs/errors#-1178-bad_sender_compid) ###
+
+* `SenderCompId(49)` contains an incorrect value. The SenderCompID value should not change throughout the lifetime of a session.
+
+### -1179 BAD\_SEQ\_NUM[​](/docs/binance-spot-api-docs/errors#-1179-bad_seq_num) ###
+
+* `MsgSeqNum(34)` contains an unexpected value. Expected: '%d'.
+
+### -1180 EXPECTED\_LOGON[​](/docs/binance-spot-api-docs/errors#-1180-expected_logon) ###
+
+* [Logon`<A>`](/docs/binance-spot-api-docs/fix-api#logon-main) must be the first message in the session.
+
+### -1181 TOO\_MANY\_MESSAGES[​](/docs/binance-spot-api-docs/errors#-1181-too_many_messages) ###
+
+* Too many messages; current limit is '%d' messages per '%s'.
+
+### -1182 PARAMS\_BAD\_COMBO[​](/docs/binance-spot-api-docs/errors#-1182-params_bad_combo) ###
+
+* Conflicting fields: [%s]
+
+### -1183 NOT\_ALLOWED\_IN\_DROP\_COPY\_SESSIONS[​](/docs/binance-spot-api-docs/errors#-1183-not_allowed_in_drop_copy_sessions) ###
+
+* Requested operation is not allowed in DropCopy sessions.
+
+### -1184 DROP\_COPY\_SESSION\_NOT\_ALLOWED[​](/docs/binance-spot-api-docs/errors#-1184-drop_copy_session_not_allowed) ###
+
+* DropCopy sessions are not supported on this server. Please reconnect to a drop copy server.
+
+### -1185 DROP\_COPY\_SESSION\_REQUIRED[​](/docs/binance-spot-api-docs/errors#-1185-drop_copy_session_required) ###
+
+* Only DropCopy sessions are supported on this server. Either reconnect to order entry server or send `DropCopyFlag (9406)` field.
+
+### -1186 NOT\_ALLOWED\_IN\_ORDER\_ENTRY\_SESSIONS[​](/docs/binance-spot-api-docs/errors#-1186-not_allowed_in_order_entry_sessions) ###
+
+* Requested operation is not allowed in order entry sessions.
+
+### -1187 NOT\_ALLOWED\_IN\_MARKET\_DATA\_SESSIONS[​](/docs/binance-spot-api-docs/errors#-1187-not_allowed_in_market_data_sessions) ###
+
+* Requested operation is not allowed in market data sessions.
+
+### -1188 INCORRECT\_NUM\_IN\_GROUP\_COUNT[​](/docs/binance-spot-api-docs/errors#-1188-incorrect_num_in_group_count) ###
+
+* Incorrect NumInGroup count for repeating group '%s'.
+
+### -1189 DUPLICATE\_ENTRIES\_IN\_A\_GROUP[​](/docs/binance-spot-api-docs/errors#-1189-duplicate_entries_in_a_group) ###
+
+* Group '%s' contains duplicate entries.
+
+### -1190 INVALID\_REQUEST\_ID[​](/docs/binance-spot-api-docs/errors#-1190-invalid_request_id) ###
+
+* 'MDReqID (262)' contains a subscription request id that is already in use on this connection.
+* 'MDReqID (262)' contains an unsubscription request id that does not match any active subscription.
+
+### -1191 TOO\_MANY\_SUBSCRIPTIONS[​](/docs/binance-spot-api-docs/errors#-1191-too_many_subscriptions) ###
+
+* Too many subscriptions. Connection may create up to '%s' subscriptions at a time.
+* Similar subscription is already active on this connection. Symbol='%s', active subscription id: '%s'.
+
+#### -1194 INVALID\_TIME\_UNIT[​](/docs/binance-spot-api-docs/errors#-1194-invalid_time_unit) ####
+
+* Invalid value for time unit; expected either MICROSECOND or MILLISECOND.
+
+### -1196 BUY\_OCO\_STOP\_LOSS\_MUST\_BE\_ABOVE[​](/docs/binance-spot-api-docs/errors#-1196-buy_oco_stop_loss_must_be_above) ###
+
+* A stop loss order in a buy OCO must be above.
+
+### -1197 SELL\_OCO\_STOP\_LOSS\_MUST\_BE\_BELOW[​](/docs/binance-spot-api-docs/errors#-1197-sell_oco_stop_loss_must_be_below) ###
+
+* A stop loss order in a sell OCO must be below.
+
+### -1198 BUY\_OCO\_TAKE\_PROFIT\_MUST\_BE\_BELOW[​](/docs/binance-spot-api-docs/errors#-1198-buy_oco_take_profit_must_be_below) ###
+
+* A take profit order in a buy OCO must be below.
+
+### -1199 SELL\_OCO\_TAKE\_PROFIT\_MUST\_BE\_ABOVE[​](/docs/binance-spot-api-docs/errors#-1199-sell_oco_take_profit_must_be_above) ###
+
+* A take profit order in a sell OCO must be above.
+
+### -2010 NEW\_ORDER\_REJECTED[​](/docs/binance-spot-api-docs/errors#-2010-new_order_rejected) ###
+
+* NEW\_ORDER\_REJECTED
+
+### -2011 CANCEL\_REJECTED[​](/docs/binance-spot-api-docs/errors#-2011-cancel_rejected) ###
+
+* CANCEL\_REJECTED
+
+### -2013 NO\_SUCH\_ORDER[​](/docs/binance-spot-api-docs/errors#-2013-no_such_order) ###
+
+* Order does not exist.
+
+### -2014 BAD\_API\_KEY\_FMT[​](/docs/binance-spot-api-docs/errors#-2014-bad_api_key_fmt) ###
+
+* API-key format invalid.
+
+### -2015 REJECTED\_MBX\_KEY[​](/docs/binance-spot-api-docs/errors#-2015-rejected_mbx_key) ###
+
+* Invalid API-key, IP, or permissions for action.
+
+### -2016 NO\_TRADING\_WINDOW[​](/docs/binance-spot-api-docs/errors#-2016-no_trading_window) ###
+
+* No trading window could be found for the symbol. Try ticker/24hrs instead.
+
+### -2026 ORDER\_ARCHIVED[​](/docs/binance-spot-api-docs/errors#-2026-order_archived) ###
+
+* Order was canceled or expired with no executed qty over 90 days ago and has been archived.
+
+[]()
+
+Messages for -1010 ERROR\_MSG\_RECEIVED, -2010 NEW\_ORDER\_REJECTED, and -2011 CANCEL\_REJECTED[​](/docs/binance-spot-api-docs/errors#messages-for--1010-error_msg_received--2010-new_order_rejected-and--2011-cancel_rejected)
+----------
+
+This code is sent when an error has been returned by the matching engine.
+The following messages which will indicate the specific error:
+
+|                                Error message                                 |                                                                                                               Description                                                                                                               |
+|------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|                            "Unknown order sent."                             |                                                                              The order (by either `orderId`, `clOrdId`, `origClOrdId`) could not be found.                                                                              |
+|                           "Duplicate order sent."                            |                                                                                                    The `clOrdId` is already in use.                                                                                                     |
+|                             "Market is closed."                              |                                                                                                       The symbol is not trading.                                                                                                        |
+|           "Account has insufficient balance for requested action."           |                                                                                                Not enough funds to complete the action.                                                                                                 |
+|              "Market orders are not supported for this symbol."              |                                                                                                 `MARKET` is not enabled on the symbol.                                                                                                  |
+|             "Iceberg orders are not supported for this symbol."              |                                                                                               `icebergQty` is not enabled on the symbol.                                                                                                |
+|            "Stop loss orders are not supported for this symbol."             |                                                                                                `STOP_LOSS` is not enabled on the symbol.                                                                                                |
+|         "Stop loss limit orders are not supported for this symbol."          |                                                                                             `STOP_LOSS_LIMIT` is not enabled on the symbol.                                                                                             |
+|           "Take profit orders are not supported for this symbol."            |                                                                                               `TAKE_PROFIT` is not enabled on the symbol.                                                                                               |
+|        "Take profit limit orders are not supported for this symbol."         |                                                                                            `TAKE_PROFIT_LIMIT` is not enabled on the symbol.                                                                                            |
+|                       "Price \* QTY is zero or less."                        |                                                                                                    `price` \* `quantity` is too low.                                                                                                    |
+|                          "IcebergQty exceeds QTY."                           |                                                                                           `icebergQty` must be less than the order quantity.                                                                                            |
+|                  "This action is disabled on this account."                  |                                                                                Contact customer support; some actions have been disabled on the account.                                                                                |
+|                "This account may not place or cancel orders."                |                                                                                   Contact customer support; the account has trading ability disabled.                                                                                   |
+|                       "Unsupported order combination"                        |                                                                       The `orderType`, `timeInForce`, `stopPrice`, and/or `icebergQty` combination isn't allowed.                                                                       |
+|                      "Order would trigger immediately."                      |                                                                               The order's stop price is not valid when compared to the last traded price.                                                                               |
+|          "Cancel order is invalid. Check origClOrdId and orderId."           |                                                                                               No `origClOrdId` or `orderId` was sent in.                                                                                                |
+|                  "Order would immediately match and take."                   |                                                                       `LIMIT_MAKER` order type would immediately match and trade, and not be a pure maker order.                                                                        |
+|       "The relationship of the prices for the orders is not correct."        |The prices set in the `OCO` is breaking the Price restrictions.   <br/> For reference:   <br/>`BUY` : `LIMIT_MAKER` `price` \< Last Traded Price \< `stopPrice`   <br/>`SELL` : `LIMIT_MAKER` `price` \> Last Traded Price \> `stopPrice`|
+|                "OCO orders are not supported for this symbol"                |                                                                                                   `OCO` is not enabled on the symbol.                                                                                                   |
+|       "Quote order qty market orders are not support for this symbol."       |                                                                           `MARKET` orders using the parameter `quoteOrderQty` are not enabled on the symbol.                                                                            |
+|          "Trailing stop orders are not supported for this symbol."           |                                                                                       Orders using `trailingDelta` are not enabled on the symbol.                                                                                       |
+|           "Order cancel-replace is not supported for this symbol."           |                                                          `POST /api/v3/order/cancelReplace` (REST API) or `order.cancelReplace` (WebSocket API) is not enabled on the symbol.                                                           |
+|               "This symbol is not permitted for this account."               |                                                                            Account and symbol do not have the same permissions. (e.g. `SPOT`, `MARGIN`, etc)                                                                            |
+|                "This symbol is restricted for this account."                 |                                                               Account is unable to trade on that symbol. (e.g. An `ISOLATED_MARGIN` account cannot place `SPOT` orders.)                                                                |
+|             "Order was not canceled due to cancel restrictions."             |             Either `cancelRestrictions` was set to `ONLY_NEW` but the order status was not `NEW`   <br/> or   <br/>`cancelRestrictions` was set to `ONLY_PARTIALLY_FILLED` but the order status was not `PARTIALLY_FILLED`.             |
+| "Rest API trading is not enabled." / "WebSocket API trading is not enabled." |                                                                     Order is being placed or a server that is not configured to allow access to `TRADE` endpoints.                                                                      |
+|   "Order book liquidity is less than `LOT_SIZE` filter minimum quantity."    |                                             Quote quantity market orders cannot be placed when the order book liquidity is less than minimum quantity configured for the `LOT_SIZE` filter.                                             |
+|"Order book liquidity is less than `MARKET_LOT_SIZE` filter minimum quantity."|                                               Quote quantity market orders cannot be placed when the order book liquidity is less than the minimum quantity for `MARKET_LOT_SIZE` filter.                                               |
+|         "Order book liquidity is less than symbol minimum quantity."         |                                                                           Quote quantity market orders cannot be placed when there are no orders on the book.                                                                           |
+
+Errors regarding POST /api/v3/order/cancelReplace[​](/docs/binance-spot-api-docs/errors#errors-regarding-post-apiv3ordercancelreplace)
+----------
+
+### -2021 Order cancel-replace partially failed[​](/docs/binance-spot-api-docs/errors#-2021-order-cancel-replace-partially-failed) ###
+
+* This code is sent when either the cancellation of the order failed or the new order placement failed but not both.
+
+### -2022 Order cancel-replace failed.[​](/docs/binance-spot-api-docs/errors#-2022-order-cancel-replace-failed) ###
+
+* This code is sent when both the cancellation of the order failed and the new order placement failed.
+
+[]()
+
+Filter failures[​](/docs/binance-spot-api-docs/errors#filter-failures)
+----------
+
+|                    Error message                    |                                                                                       Description                                                                                       |
+|-----------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|           "Filter failure: PRICE\_FILTER"           |                                                  `price` is too high, too low, and/or not following the tick size rule for the symbol.                                                  |
+|          "Filter failure: PERCENT\_PRICE"           |                                              `price` is X% too high or X% too low from the average weighted price over the last Y minutes.                                              |
+|             "Filter failure: LOT\_SIZE"             |                                                `quantity` is too high, too low, and/or not following the step size rule for the symbol.                                                 |
+|           "Filter failure: MIN\_NOTIONAL"           |                                                          `price` \* `quantity` is too low to be a valid order for the symbol.                                                           |
+|             "Filter failure: NOTIONAL"              |                                                    `price` \* `quantity` is not within range of the `minNotional` and `maxNotional`                                                     |
+|          "Filter failure: ICEBERG\_PARTS"           |                                                        `ICEBERG` order would break into too many parts; icebergQty is too small.                                                        |
+|         "Filter failure: MARKET\_LOT\_SIZE"         |                                        `MARKET` order's `quantity` is too high, too low, and/or not following the step size rule for the symbol.                                        |
+|           "Filter failure: MAX\_POSITION"           |The account's position has reached the maximum defined limit.   <br/> This is composed of the sum of the balance of the base asset, and the sum of the quantity of all open `BUY` orders.|
+|         "Filter failure: MAX\_NUM\_ORDERS"          |                                                                     Account has too many open orders on the symbol.                                                                     |
+|      "Filter failure: MAX\_NUM\_ALGO\_ORDERS"       |                                                      Account has too many open stop loss and/or take profit orders on the symbol.                                                       |
+|     "Filter failure: MAX\_NUM\_ICEBERG\_ORDERS"     |                                                                 Account has too many open iceberg orders on the symbol.                                                                 |
+|          "Filter failure: TRAILING\_DELTA"          |                                                   `trailingDelta` is not within the defined range of the filter for that order type.                                                    |
+|    "Filter failure: EXCHANGE\_MAX\_NUM\_ORDERS"     |                                                                    Account has too many open orders on the exchange.                                                                    |
+| "Filter failure: EXCHANGE\_MAX\_NUM\_ALGO\_ORDERS"  |                                                     Account has too many open stop loss and/or take profit orders on the exchange.                                                      |
+|"Filter failure: EXCHANGE\_MAX\_NUM\_ICEBERG\_ORDERS"|                                                                Account has too many open iceberg orders on the exchange.                                                                |
+
 ## GENERAL API INFORMATION
 
 General API Information
@@ -2021,7 +2488,209 @@ Get current account commission rates.
 
 ## USER DATA STREAM
 
-Content not found.
+User Data Streams for Binance
+==========
+
+**Last Updated: 2024-12-17**
+
+* The base API endpoint is: **[https://api.binance.com](https://api.binance.com)**
+* A User Data Stream `listenKey` is valid for 60 minutes after creation.
+* Doing a `PUT` on an active `listenKey` will extend its validity for 60 minutes.
+* Doing a `DELETE` on an active `listenKey` will close the stream and invalidate the `listenKey`.
+* Doing a `POST` on an account with an active `listenKey` will return the currently active `listenKey` and extend its validity for 60 minutes.
+* The base websocket endpoint is: **wss://stream.binance.com:9443**
+* User Data Streams are accessed at **/ws/\<listenKey\>** or **/stream?streams=\<listenKey\>**
+* A single connection to **stream.binance.com** is only valid for 24 hours; expect to be disconnected at the 24 hour mark.
+* All time and timestamp related fields in the JSON responses are **milliseconds by default**. To receive the information in microseconds, please add the parameter `timeUnit=MICROSECOND` or `timeUnit=microsecond` in the URL.
+  * For example `/ws/<listenKey>?timeUnit=MICROSECOND`
+
+API Endpoints[​](/docs/binance-spot-api-docs/user-data-stream#api-endpoints)
+----------
+
+### Create a listenKey (USER\_STREAM)[​](/docs/binance-spot-api-docs/user-data-stream#create-a-listenkey-user_stream) ###
+
+```
+POST /api/v3/userDataStream
+```
+
+Start a new user data stream. The stream will close after 60 minutes unless a keepalive is sent. If the account has an active `listenKey`, that `listenKey` will be returned and its validity will be extended for 60 minutes.
+
+**Weight:**1
+
+**Parameters:**NONE
+
+**Response:**
+
+```
+{  "listenKey": "pqia91ma19a5s61cv6a81va65sdf19v8a65a1a5s61cv6a81va65sdf19v8a65a1"}
+```
+
+### Ping/Keep-alive a listenKey (USER\_STREAM)[​](/docs/binance-spot-api-docs/user-data-stream#pingkeep-alive-a-listenkey-user_stream) ###
+
+```
+PUT /api/v3/userDataStream
+```
+
+Keepalive a user data stream to prevent a time out. User data streams will close after 60 minutes. It's recommended to send a ping about every 30 minutes.
+
+**Weight:**1
+
+**Parameters:**
+
+|  Name   | Type |Mandatory|Description|
+|---------|------|---------|-----------|
+|listenKey|STRING|   YES   |           |
+
+**Response:**
+
+```
+{}
+```
+
+### Close a listenKey (USER\_STREAM)[​](/docs/binance-spot-api-docs/user-data-stream#close-a-listenkey-user_stream) ###
+
+```
+DELETE /api/v3/userDataStream
+```
+
+Close out a user data stream.
+
+**Weight:**1
+
+**Parameters:**
+
+|  Name   | Type |Mandatory|Description|
+|---------|------|---------|-----------|
+|listenKey|STRING|   YES   |           |
+
+**Response:**
+
+```
+{}
+```
+
+Web Socket Payloads[​](/docs/binance-spot-api-docs/user-data-stream#web-socket-payloads)
+----------
+
+### Account Update[​](/docs/binance-spot-api-docs/user-data-stream#account-update) ###
+
+`outboundAccountPosition` is sent any time an account balance has changed and contains the assets that were possibly changed by the event that generated the balance change.
+
+```
+{  "e": "outboundAccountPosition", // Event type  "E": 1564034571105,             // Event Time  "u": 1564034571073,             // Time of last account update  "B": [                          // Balances Array    {      "a": "ETH",                 // Asset      "f": "10000.000000",        // Free      "l": "0.000000"             // Locked    }  ]}
+```
+
+### Balance Update[​](/docs/binance-spot-api-docs/user-data-stream#balance-update) ###
+
+Balance Update occurs during the following:
+
+* Deposits or withdrawals from the account
+* Transfer of funds between accounts (e.g. Spot to Margin)
+
+**Payload**
+
+```
+{  "e": "balanceUpdate",         // Event Type  "E": 1573200697110,           // Event Time  "a": "BTC",                   // Asset  "d": "100.00000000",          // Balance Delta  "T": 1573200697068            // Clear Time}
+```
+
+### Order Update[​](/docs/binance-spot-api-docs/user-data-stream#order-update) ###
+
+Orders are updated with the `executionReport` event.
+
+We recommend using the [FIX API](/docs/binance-spot-api-docs/fix-api) for better performance compared to using the User Data Streams.
+
+**Payload:**
+
+```
+{  "e": "executionReport",        // Event type  "E": 1499405658658,            // Event time  "s": "ETHBTC",                 // Symbol  "c": "mUvoqJxFIILMdfAW5iGSOW", // Client order ID  "S": "BUY",                    // Side  "o": "LIMIT",                  // Order type  "f": "GTC",                    // Time in force  "q": "1.00000000",             // Order quantity  "p": "0.10264410",             // Order price  "P": "0.00000000",             // Stop price  "F": "0.00000000",             // Iceberg quantity  "g": -1,                       // OrderListId  "C": "",                       // Original client order ID; This is the ID of the order being canceled  "x": "NEW",                    // Current execution type  "X": "NEW",                    // Current order status  "r": "NONE",                   // Order reject reason; will be an error code.  "i": 4293153,                  // Order ID  "l": "0.00000000",             // Last executed quantity  "z": "0.00000000",             // Cumulative filled quantity  "L": "0.00000000",             // Last executed price  "n": "0",                      // Commission amount  "N": null,                     // Commission asset  "T": 1499405658657,            // Transaction time  "t": -1,                       // Trade ID  "v": 3,                        // Prevented Match Id; This is only visible if the order expired due to STP  "I": 8641984,                  // Execution Id  "w": true,                     // Is the order on the book?  "m": false,                    // Is this trade the maker side?  "M": false,                    // Ignore  "O": 1499405658657,            // Order creation time  "Z": "0.00000000",             // Cumulative quote asset transacted quantity  "Y": "0.00000000",             // Last quote asset transacted quantity (i.e. lastPrice * lastQty)  "Q": "0.00000000",             // Quote Order Quantity  "W": 1499405658657,            // Working Time; This is only visible if the order has been placed on the book.  "V": "NONE"                    // SelfTradePreventionMode}
+```
+
+**Note:** Average price can be found by doing `Z` divided by `z`.
+
+#### Conditional Fields in Execution Report[​](/docs/binance-spot-api-docs/user-data-stream#conditional-fields-in-execution-report) ####
+
+These are fields that appear in the payload only if certain conditions are met.
+
+For additional information on these parameters, please refer to the [Spot Glossary](/docs/binance-spot-api-docs/faqs/spot_glossary).
+
+|Field|            Name             |                                  Description                                  |           Examples           |
+|-----|-----------------------------|-------------------------------------------------------------------------------|------------------------------|
+| `d` |       Trailing Delta        |                    Appears only for trailing stop orders.                     |           `"d": 4`           |
+| `D` |        Trailing Time        |                             `"D": 1668680518494`                              |                              |
+| `j` |         Strategy Id         | Appears only if the `strategyId` parameter was provided upon order placement. |           `"j": 1`           |
+| `J` |        Strategy Type        |Appears only if the `strategyType` parameter was provided upon order placement.|        `"J": 1000000`        |
+| `v` |     Prevented Match Id      |               Appears only for orders that expired due to STP.                |           `"v": 3`           |
+| `A` |     Prevented Quantity      |                               `"A":"3.000000"`                                |                              |
+| `B` |   Last Prevented Quantity   |                               `"B":"3.000000"`                                |                              |
+| `u` |       Trade Group Id        |                                    `"u":1`                                    |                              |
+| `U` |      Counter Order Id       |                                   `"U":37`                                    |                              |
+|`Cs` |       Counter Symbol        |                               `"Cs": "BTCUSDT"`                               |                              |
+|`pl` |Prevented Execution Quantity |                               `"pl":"2.123456"`                               |                              |
+|`pL` |  Prevented Execution Price  |                              `"pL":"0.10000001"`                              |                              |
+|`pY` |Prevented Execution Quote Qty|                              `"pY":"0.21234562"`                              |                              |
+| `W` |        Working Time         |                 Appears when the order is working on the book                 |     `"W": 1668683798379`     |
+| `b` |         Match Type          |                   Appears for orders that have allocations                    |`"b":"ONE_PARTY_TRADE_REPORT"`|
+| `a` |        Allocation ID        |                                  `"a":1234`                                   |                              |
+| `k` |        Working Floor        |             Appears for orders that potentially have allocations              |         `"k":"SOR"`          |
+|`uS` |           UsedSor           |                       Appears for orders that used SOR                        |         `"uS":true`          |
+
+If the order is an order list, an event named `ListStatus` will be sent in addition to the `executionReport` event.
+
+**Payload**
+
+```
+{  "e": "listStatus",                // Event Type  "E": 1564035303637,               // Event Time  "s": "ETHBTC",                    // Symbol  "g": 2,                           // OrderListId  "c": "OCO",                       // Contingency Type  "l": "EXEC_STARTED",              // List Status Type  "L": "EXECUTING",                 // List Order Status  "r": "NONE",                      // List Reject Reason  "C": "F4QN4G8DlFATFlIUQ0cjdD",    // List Client Order ID  "T": 1564035303625,               // Transaction Time  "O": [                            // An array of objects    {      "s": "ETHBTC",                // Symbol      "i": 17,                      // OrderId      "c": "AJYsMjErWJesZvqlJCTUgL" // ClientOrderId    },    {      "s": "ETHBTC",      "i": 18,      "c": "bfYPSQdLoqAJeNrOr9adzq"    }  ]}
+```
+
+**Execution types:**
+
+* `NEW` - The order has been accepted into the engine.
+* `CANCELED` - The order has been canceled by the user.
+* `REPLACED` (currently unused)
+* `REJECTED` - The order has been rejected and was not processed (This message appears only with Cancel Replace Orders wherein the new order placement is rejected but the request to cancel request succeeds.)
+* `TRADE` - Part of the order or all of the order's quantity has filled.
+* `EXPIRED` - The order was canceled according to the order type's rules (e.g. LIMIT FOK orders with no fill, LIMIT IOC or MARKET orders that partially fill) or by the exchange, (e.g. orders canceled during liquidation, orders canceled during maintenance).
+* `TRADE_PREVENTION` - The order has expired due to STP.
+
+Check the [Enums page](/docs/binance-spot-api-docs/enums) for more relevant enum definitions.
+
+### Listen Key Expired[​](/docs/binance-spot-api-docs/user-data-stream#listen-key-expired) ###
+
+This event is sent when the listen key expires.
+
+No more events will be sent after this until a new `listenKey` is created.
+
+This event will not be pushed when the stream is closed normally.
+
+**Payload:**
+
+```
+{  "e": "listenKeyExpired",  // Event type  "E": 1699596037418,      // Event time  "listenKey": "OfYGbUzi3PraNagEkdKuFwUHn48brFsItTdsuiIXrucEvD0rhRXZ7I6URWfE8YE8" }
+```
+
+Event Stream Terminated[​](/docs/binance-spot-api-docs/user-data-stream#event-stream-terminated)
+----------
+
+This event appears only for WebSocket API.
+
+`eventStreamTerminated` is sent when the User Data Stream is stopped. For example, after you send a `userDataStream.stop` request, or a `session.logout` request.
+
+**Payload:**
+
+```
+{  "event": {    "e": "eventStreamTerminated", // Event Type    "E": 1728973001334            // Event Time  }}
+```
+
+External Lock Update[​](/docs/binance-spot-api-docs/user-data-stream#external-lock-update)
+----------
+
+`externalLockUpdate` is sent when part of your spot wallet balance is locked/unlocked by an external system, for example when used as margin collateral.
+
+**Payload:**
+
+```
+{  "e": "externalLockUpdate",  // Event Type  "E": 1581557507324,         // Event Time  "a": "NEO",                 // Asset  "d": "10.00000000",         // Delta  "T": 1581557507268          // Transaction Time}
+```
 
 ## USER DATA STREAM ENDPOINTS
 
@@ -2097,8 +2766,4 @@ Close out a user data stream.
 ```
 {}
 ```
-
-## ERRORS
-
-Content not found.
 
