@@ -25,6 +25,10 @@ LLM friendly versions of Crypto Exchange Documentation. Each file is designed to
 | Binance Options | Public REST | [Public REST Docs](docs/binance/options/public_rest_api.md) | 2025-03-15 |
 | Binance Options | Private WebSocket | [Private WebSocket Docs](docs/binance/options/private_websocket_api.md) | 2025-03-15 |
 | Binance Options | Public WebSocket | [Public WebSocket Docs](docs/binance/options/public_websocket_api.md) | 2025-03-15 |
+| ByBit V5 | Private REST | [Private REST Docs](docs/bybit/v5/private_rest_api.md) | 2025-03-15 |
+| ByBit V5 | Public REST | [Public REST Docs](docs/bybit/v5/public_rest_api.md) | 2025-03-15 |
+| ByBit V5 | Private WebSocket | [Private WebSocket Docs](docs/bybit/v5/private_websocket_api.md) | 2025-03-15 |
+| ByBit V5 | Public WebSocket | [Public WebSocket Docs](docs/bybit/v5/public_websocket_api.md) | 2025-03-15 |
 
 ## Contributing
 
