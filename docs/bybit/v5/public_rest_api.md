@@ -1,4 +1,4 @@
-# ByBit V5 REST API Documentation
+# ByBit V5 Public REST API Documentation
 
 ## RATE LIMIT
 
