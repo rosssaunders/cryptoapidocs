@@ -23,6 +23,8 @@ enum Exchange {
     BinanceCoinM,
     #[value(name = "binanceoptions")]
     BinanceOptions,
+    #[value(name = "bybit")]
+    ByBit,
 }
 
 #[derive(Parser, Debug)]
@@ -57,6 +59,7 @@ async fn main() -> Result<(), Box<dyn Error>> {
                 Exchange::BinanceSpot => exchanges::processor_registry::create_processors_by_exchange("binancespot"),
                 Exchange::BinanceCoinM => exchanges::processor_registry::create_processors_by_exchange("binancecoinm"),
                 Exchange::BinanceOptions => exchanges::processor_registry::create_processors_by_exchange("binanceoptions"),
+                Exchange::ByBit => exchanges::processor_registry::create_processors_by_exchange("bybit"),
             };
 
             // Process each exchange and collect results
