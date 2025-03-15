@@ -21,6 +21,10 @@ LLM friendly versions of Crypto Exchange Documentation. Each file is designed to
 | Binance CoinM | Public REST | [Public REST Docs](docs/binance/coinm/public_rest_api.md) | 2025-03-14 |
 | Binance CoinM | Private WebSocket | [Private WebSocket Docs](docs/binance/coinm/private_websocket_api.md) | 2025-03-15 |
 | Binance CoinM | Public WebSocket | [Public WebSocket Docs](docs/binance/coinm/public_websocket_api.md) | 2025-03-15 |
+| Binance Options | Private REST | [Private REST Docs](docs/binance/options/private_rest_api.md) | 2025-03-15 |
+| Binance Options | Public REST | [Public REST Docs](docs/binance/options/public_rest_api.md) | 2025-03-15 |
+| Binance Options | Private WebSocket | [Private WebSocket Docs](docs/binance/options/private_websocket_api.md) | 2025-03-15 |
+| Binance Options | Public WebSocket | [Public WebSocket Docs](docs/binance/options/public_websocket_api.md) | 2025-03-15 |
 
 ## Contributing
 

@@ -4,6 +4,8 @@ pub mod binancespot;
 pub mod binancecoinm;
 #[allow(unused_imports)]
 pub mod binanceusdm;
+#[allow(unused_imports)]
+pub mod binanceoptions;
 pub mod processor_registry;
 pub mod binancecommon;
 
@@ -17,6 +19,8 @@ pub use binancespot::*;
 pub use binancecoinm::*;
 #[allow(unused_imports)]
 pub use binanceusdm::*;
+#[allow(unused_imports)]
+pub use binanceoptions::*;
 
 #[async_trait]
 pub trait ApiProcessor: Send + Sync {
