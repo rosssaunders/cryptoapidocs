@@ -1,4 +1,4 @@
-# Binance Derivatives COIN-M Public REST API Documentation
+# Binance COIN-M Public REST API Documentation
 
 ## QUICK START
 

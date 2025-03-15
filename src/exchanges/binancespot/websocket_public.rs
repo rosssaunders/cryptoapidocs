@@ -5,12 +5,12 @@ use crate::exchanges::binancecommon::doc_processor::DocProcessor;
 use cryptoapidocs_macros::ProcessorRegistration;
 
 #[derive(Default, ProcessorRegistration)]
-#[processor("binancespot_private_websocket")]
+#[processor("binancespot_public_websocket")]
 #[exchange("binancespot")]
-pub struct PrivateWebsocket;
+pub struct PublicWebsocket;
 
 #[async_trait]
-impl ApiProcessor for PrivateWebsocket {
+impl ApiProcessor for PublicWebsocket {
     async fn process_docs(&self) -> Result<(u32, String, String), Box<dyn Error>> {
         let processor = DocProcessor::new(
             Self::ENDPOINTS,
@@ -25,9 +25,8 @@ impl ApiProcessor for PrivateWebsocket {
     }
 }
 
-impl PrivateWebsocket {
+impl PublicWebsocket {
     const ENDPOINTS: &'static [&'static str] = &[
-        "binance-spot-api-docs/user-data-stream",
         "binance-spot-api-docs/errors",
         "binance-spot-api-docs/filters",
         "binance-spot-api-docs/enums",
@@ -36,16 +35,14 @@ impl PrivateWebsocket {
         "binance-spot-api-docs/web-socket-api/request-format",
         "binance-spot-api-docs/web-socket-api/response-format",
         "binance-spot-api-docs/web-socket-api/event-format",
+        "binance-spot-api-docs/web-socket-api/rate-limits",
         "binance-spot-api-docs/web-socket-api/request-security",
         "binance-spot-api-docs/web-socket-api/session-authentication",
         "binance-spot-api-docs/web-socket-api/data-sources",
         "binance-spot-api-docs/web-socket-api/general-requests",
-        "binance-spot-api-docs/web-socket-api/authentication-requests",
-        "binance-spot-api-docs/web-socket-api/trading-requests",
-        "binance-spot-api-docs/web-socket-api/account-requests",
-        "binance-spot-api-docs/web-socket-api/user-data-stream-requests",
+        "binance-spot-api-docs/web-socket-api/market-data-requests",
     ];
 
-    const OUTPUT_FILE: &'static str = "binance/spot/private_websocket_api.md";
-    const TITLE: &'static str = "Binance Spot Private Websocket API Documentation";
+    const OUTPUT_FILE: &'static str = "binance/spot/public_websocket_api.md";
+    const TITLE: &'static str = "Binance Spot Public Websocket API Documentation";
 }

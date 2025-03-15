@@ -25,7 +25,7 @@ impl DocProcessor {
     }
 
     pub async fn process_docs(&self) -> Result<(u32, String, String), Box<dyn Error>> {
-        println!("Downloading ByBiy API Documentation HTML files...");
+        println!("Downloading ByBit API Documentation HTML files...");
         
         let mut all_markdown = String::from(format!("# {}\n\n", self.title));
         for &endpoint in self.endpoints {
