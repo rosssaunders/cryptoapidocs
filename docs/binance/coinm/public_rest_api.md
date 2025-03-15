@@ -1417,7 +1417,35 @@ Response Example[​](/docs/derivatives/coin-margined-futures/market-data/rest-a
 
 ## CHECK SERVER TIME
 
-Content not found.
+Check Server time
+==========
+
+API Description[​](/docs/derivatives/coin-margined-futures/market-data/rest-api/Check-Server-time#api-description)
+----------
+
+Test connectivity to the Rest API and get the current server time.
+
+HTTP Request[​](/docs/derivatives/coin-margined-futures/market-data/rest-api/Check-Server-time#http-request)
+----------
+
+GET `/dapi/v1/time`
+
+Request Weight[​](/docs/derivatives/coin-margined-futures/market-data/rest-api/Check-Server-time#request-weight)
+----------
+
+**1**
+
+Request Parameters[​](/docs/derivatives/coin-margined-futures/market-data/rest-api/Check-Server-time#request-parameters)
+----------
+
+NONE
+
+Response Example[​](/docs/derivatives/coin-margined-futures/market-data/rest-api/Check-Server-time#response-example)
+----------
+
+```
+{  "serverTime": 1499827319559}
+```
 
 ## EXCHANGE INFORMATION
 
@@ -1618,6 +1646,106 @@ Response Example[​](/docs/derivatives/coin-margined-futures/market-data/rest-a
 
 ```
 [  {    "a": 416690,			// Aggregate tradeId    "p": "9642.4",  	 	// Price    "q": "3",  			 	// Quantity    "f": 595259,         	// First tradeId    "l": 595259,         	// Last tradeId    "T": 1591250548649, 	// Timestamp    "m": false,          	// Was the buyer the maker?  }]
+```
+
+## INDEX PRICE AND MARK PRICE
+
+Index Price and Mark Price
+==========
+
+API Description[​](/docs/derivatives/coin-margined-futures/market-data/rest-api/Index-Price-and-Mark-Price#api-description)
+----------
+
+Query index price and mark price
+
+HTTP Request[​](/docs/derivatives/coin-margined-futures/market-data/rest-api/Index-Price-and-Mark-Price#http-request)
+----------
+
+GET `/dapi/v1/premiumIndex`
+
+Request Weight[​](/docs/derivatives/coin-margined-futures/market-data/rest-api/Index-Price-and-Mark-Price#request-weight)
+----------
+
+**10**
+
+Request Parameters[​](/docs/derivatives/coin-margined-futures/market-data/rest-api/Index-Price-and-Mark-Price#request-parameters)
+----------
+
+| Name | Type |Mandatory|Description|
+|------|------|---------|-----------|
+|symbol|STRING|   NO    |           |
+| pair |STRING|   NO    |           |
+
+Response Example[​](/docs/derivatives/coin-margined-futures/market-data/rest-api/Index-Price-and-Mark-Price#response-example)
+----------
+
+```
+[	{		"symbol": "BTCUSD_PERP",  		"pair": "BTCUSD",  		"markPrice": "11029.69574559",	// mark price  		"indexPrice": "10979.14437500",	// index price  		"estimatedSettlePrice": "10981.74168236",  // Estimated Settle Price, only useful in the last hour before the settlement starts.  		"lastFundingRate": "0.00071003",	 // the lasted funding rate, for perpetual contract symbols only. For delivery symbols, "" will be shown.  		"interestRate": "0.00010000",		// the base asset interest rate, for perpetual contract symbols only. For delivery symbols, "" will be shown.  		"nextFundingTime": 1596096000000,	 // For perpetual contract symbols only. For delivery symbols, 0 will be shown  		"time": 1596094042000  	}, 	{ 		"symbol": "BTCUSD_200925",	 		"pair": "BTCUSD",  		"markPrice": "12077.01343750",  		"indexPrice": "10979.10312500",  		"estimatedSettlePrice": "10981.74168236",  		"lastFundingRate": "",  		"interestRate": "",	  		"nextFundingTime": 0,  		"time": 1596094042000  	}]
+```
+
+## GET FUNDING RATE HISTORY OF PERPETUAL FUTURES
+
+Get Funding Rate History of Perpetual Futures
+==========
+
+API Description[​](/docs/derivatives/coin-margined-futures/market-data/rest-api/Get-Funding-Rate-History-of-Perpetual-Futures#api-description)
+----------
+
+Get Funding Rate History of Perpetual Futures
+
+HTTP Request[​](/docs/derivatives/coin-margined-futures/market-data/rest-api/Get-Funding-Rate-History-of-Perpetual-Futures#http-request)
+----------
+
+GET `/dapi/v1/fundingRate`
+
+Request Weight[​](/docs/derivatives/coin-margined-futures/market-data/rest-api/Get-Funding-Rate-History-of-Perpetual-Futures#request-weight)
+----------
+
+**1**
+
+Request Parameters[​](/docs/derivatives/coin-margined-futures/market-data/rest-api/Get-Funding-Rate-History-of-Perpetual-Futures#request-parameters)
+----------
+
+|  Name   | Type |Mandatory|                    Description                     |
+|---------|------|---------|----------------------------------------------------|
+| symbol  |STRING|   YES   |                                                    |
+|startTime| LONG |   NO    |Timestamp in ms to get funding rate from INCLUSIVE. |
+| endTime | LONG |   NO    |Timestamp in ms to get funding rate until INCLUSIVE.|
+|  limit  | INT  |   NO    |               Default 100; max 1000                |
+
+>
+>
+> * empty array will be returned for delivery symbols.
+>
+>
+
+Response Example[​](/docs/derivatives/coin-margined-futures/market-data/rest-api/Get-Funding-Rate-History-of-Perpetual-Futures#response-example)
+----------
+
+```
+[	{		"symbol": "BTCUSD_PERP",  		"fundingTime": 1596038400000,	  		"fundingRate": "-0.00300000"  	}, 	{ 		"symbol": "BTCUSD_PERP",  		"fundingTime": 1596067200000,  		"fundingRate": "-0.00300000"  	}]
+```
+
+## GET FUNDING INFO
+
+Get Funding Rate Info
+==========
+
+API Description[​](/docs/derivatives/coin-margined-futures/market-data/rest-api/Get-Funding-Info#api-description)
+----------
+
+Query funding rate info for symbols that had FundingRateCap/ FundingRateFloor / fundingIntervalHours adjustment
+
+HTTP Request[​](/docs/derivatives/coin-margined-futures/market-data/rest-api/Get-Funding-Info#http-request)
+----------
+
+GET `/dapi/v1/fundingInfo`
+
+Response Example[​](/docs/derivatives/coin-margined-futures/market-data/rest-api/Get-Funding-Info#response-example)
+----------
+
+```
+[    {        "symbol": "BLZUSDT",        "adjustedFundingRateCap": "0.02500000",        "adjustedFundingRateFloor": "-0.02500000",        "fundingIntervalHours": 8,        "disclaimer": false    }]
 ```
 
 ## KLINE CANDLESTICK DATA
@@ -1953,18 +2081,6 @@ Response Example[​](/docs/derivatives/coin-margined-futures/market-data/rest-a
 [  [    1691603820000,          // Open time    "-0.00042931",          // Open    "-0.00023641",          // High    "-0.00059406",          // Low    "-0.00043659",          // Close    "0",                    // Ignore    1691603879999,          // Close time    "0",                    // Ignore    12,                     // Ignore    "0",                    // Ignore    "0",                    // Ignore    "0"                     // Ignore  ]]
 ```
 
-## MARK PRICE
-
-Content not found.
-
-## GET FUNDING RATE HISTORY
-
-Content not found.
-
-## GET FUNDING RATE INFO
-
-Content not found.
-
 ## 24HR TICKER PRICE CHANGE STATISTICS
 
 24hr Ticker Price Change Statistics
@@ -2051,10 +2167,6 @@ Response Example[​](/docs/derivatives/coin-margined-futures/market-data/rest-a
 [	{  		"symbol": "BTCUSD_200626",	  		"ps": "9647.8",  			// pair   		"price": "9647.8",		  		"time": 1591257246176  	}]
 ```
 
-## SYMBOL PRICE TICKER V2
-
-Content not found.
-
 ## SYMBOL ORDER BOOK TICKER
 
 Symbol Order Book Ticker
@@ -2097,10 +2209,6 @@ Response Example[​](/docs/derivatives/coin-margined-futures/market-data/rest-a
 ```
 [	{	    "lastUpdateId": 1027024,  		"symbol": "BTCUSD_200626",  		"pair": "BTCUSD",  		"bidPrice": "9650.1",  		"bidQty": "16",  		"askPrice": "9650.3",  		"askQty": "7",  		"time": 1591257300345	}]
 ```
-
-## DELIVERY PRICE
-
-Content not found.
 
 ## OPEN INTEREST
 
@@ -2323,9 +2431,52 @@ Response Example[​](/docs/derivatives/coin-margined-futures/market-data/rest-a
 [     {	  "pair": "BTCUSD",	  "longShortRatio": "0.1960",	  "longAccount": "0.6622",  //66.22%	  "shortAccount": "0.3378",  //33.78%	  "timestamp": 1583139600000   },   {     "pair": "BTCUSD",	  "longShortRatio": "1.9559",	  "longAccount": "0.6617",  	  "shortAccount": "0.3382",  	  "timestamp": 1583139900000	}]
 ```
 
-## TAKER BUYSELL VOLUME
+## TAKER BUY SELL VOLUME
 
-Content not found.
+Taker Buy/Sell Volume
+==========
+
+API Description[​](/docs/derivatives/coin-margined-futures/market-data/rest-api/Taker-Buy-Sell-Volume#api-description)
+----------
+
+Taker Buy Volume: the total volume of buy orders filled by takers within the period.
+Taker Sell Volume: the total volume of sell orders filled by takers within the period.
+
+HTTP Request[​](/docs/derivatives/coin-margined-futures/market-data/rest-api/Taker-Buy-Sell-Volume#http-request)
+----------
+
+GET `/futures/data/takerBuySellVol`
+
+Request Weight[​](/docs/derivatives/coin-margined-futures/market-data/rest-api/Taker-Buy-Sell-Volume#request-weight)
+----------
+
+**1**
+
+Request Parameters[​](/docs/derivatives/coin-margined-futures/market-data/rest-api/Taker-Buy-Sell-Volume#request-parameters)
+----------
+
+|    Name    | Type |Mandatory|                  Description                  |
+|------------|------|---------|-----------------------------------------------|
+|    pair    |STRING|   YES   |                    BTCUSD                     |
+|contractType| ENUM |   YES   |ALL, CURRENT\_QUARTER, NEXT\_QUARTER, PERPETUAL|
+|   period   | ENUM |   YES   |"5m","15m","30m","1h","2h","4h","6h","12h","1d"|
+|   limit    | LONG |   NO    |              Default 30,Max 500               |
+| startTime  | LONG |   NO    |                                               |
+|  endTime   | LONG |   NO    |                                               |
+
+>
+>
+> * If startTime and endTime are not sent, the most recent data is returned.
+> * Only the data of the latest 30 days is available.
+>
+>
+
+Response Example[​](/docs/derivatives/coin-margined-futures/market-data/rest-api/Taker-Buy-Sell-Volume#response-example)
+----------
+
+```
+[     {	  "pair": "BTCUSD",	  "contractType": "CURRENT_QUARTER",	  "takerBuyVol": "387",  //unit: cont	  "takerSellVol": "248",  //unit: cont	  "takerBuyVolValue": "2342.1220", //unit: base asset	  "takerSellVolValue": "4213.9800", //unit: base asset	  "timestamp": 1591261042378   },   {     "pair": "BTCUSD",	  "contractType": "CURRENT_QUARTER",	  "takerBuyVol": "234",  //unit: cont	  "takerSellVol": "121",  //unit: cont	  "takerBuyVolValue": "4563.1320", //unit: base asset	  "takerSellVolValue": "3313.3940", //unit: base asset	  "timestamp": 1585615200000   }]
+```
 
 ## BASIS
 
@@ -2372,14 +2523,6 @@ Response Example[​](/docs/derivatives/coin-margined-futures/market-data/rest-a
 ```
 [     {        "indexPrice": "29269.93972727",        "contractType": "CURRENT_QUARTER",        "basisRate": "0.0024",        "futuresPrice": "29341.3",        "annualizedBasisRate": "0.0283",        "basis": "71.36027273",        "pair": "BTCUSD",        "timestamp": 1653381600000   }]
 ```
-
-## COMPOSITE INDEX SYMBOL INFORMATION
-
-Content not found.
-
-## MULTI ASSETS MODE ASSET INDEX
-
-Content not found.
 
 ## INDEX CONSTITUENTS
 

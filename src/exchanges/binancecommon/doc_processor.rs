@@ -65,6 +65,9 @@ impl DocProcessor {
 
 async fn fetch_page(url: &str) -> Result<String, Box<dyn Error>> {
     let response = reqwest::get(url).await?.text().await?;
+    if response.contains("Page Not Found") {
+        panic!("Page not found error encountered for URL: {}", url);
+    }
     Ok(response)
 }
 
