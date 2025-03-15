@@ -28,7 +28,16 @@ impl ApiProcessor for PrivateWebsocket {
 impl PrivateWebsocket {
     const ENDPOINTS: &'static [&'static str] = &[
         "derivatives/quick-start",
-        
+        "derivatives/option/general-info",
+        "derivatives/option/common-definition",
+        "derivatives/option/error-code",
+        "derivatives/option/user-data-streams",
+        "derivatives/option/user-data-streams/Start-User-Data-Stream",
+        "derivatives/option/user-data-streams/Keepalive-User-Data-Stream",
+        "derivatives/option/user-data-streams/Close-User-Data-Stream",
+        "derivatives/option/user-data-streams/Event-Risk-level-change",
+        "derivatives/option/user-data-streams/Event-Order-update",
+        "derivatives/option/user-data-streams/Event-Account-data",
     ];
     
     const OUTPUT_FILE: &'static str = "binance/options/private_websocket_api.md";
