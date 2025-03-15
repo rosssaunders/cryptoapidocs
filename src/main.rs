@@ -6,8 +6,12 @@ mod utils;
 
 #[derive(Debug, Clone, ValueEnum)]
 enum Exchange {
+    #[value(name = "binancespot")]
     BinanceSpot,
-    BinanceFutures,
+    #[value(name = "binanceusdm")]
+    BinanceUSDM,
+    #[value(name = "binancecoinm")]
+    BinanceCoinM,
 }
 
 #[derive(Parser, Debug)]
@@ -31,7 +35,11 @@ async fn main() -> Result<(), Box<dyn Error>> {
     let args = Args::parse();
 
     // Get processors based on exchange type
-    let processors = exchanges::create_processors_by_type(matches!(args.exchange, Exchange::BinanceSpot));
+    let processors = match args.exchange {
+        Exchange::BinanceUSDM => exchanges::processor_registry::create_processors_by_exchange("binanceusdm"),
+        Exchange::BinanceSpot => exchanges::processor_registry::create_processors_by_exchange("binancespot"),
+        Exchange::BinanceCoinM => exchanges::processor_registry::create_processors_by_exchange("binancecoinm"),
+    };
 
     // Process each exchange and collect results
     let mut results = Vec::new();

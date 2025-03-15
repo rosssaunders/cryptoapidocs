@@ -1,15 +1,16 @@
 use std::error::Error;
 use async_trait::async_trait;
 use crate::exchanges::ApiProcessor;
-use crate::exchanges::doc_processor::DocProcessor;
+use crate::exchanges::binancecommon::doc_processor::DocProcessor;
 use cryptoapidocs_macros::ProcessorRegistration;
 
 #[derive(Default, ProcessorRegistration)]
-#[processor("binance_derivatives_coinm_private")]
-pub struct CoinMRestPrivate;
+#[processor("binancecoinm_private_rest")]
+#[exchange("binancecoinm")]
+pub struct PrivateREST;
 
 #[async_trait]
-impl ApiProcessor for CoinMRestPrivate {
+impl ApiProcessor for PrivateREST {
     async fn process_docs(&self) -> Result<(u32, String, String), Box<dyn Error>> {
         let processor = DocProcessor::new(
             Self::ENDPOINTS,
@@ -24,8 +25,13 @@ impl ApiProcessor for CoinMRestPrivate {
     }
 }
 
-impl CoinMRestPrivate {
+impl PrivateREST {
     const ENDPOINTS: &'static [&'static str] = &[
+        "derivatives/quick-start",
+        "derivatives/coin-margined-futures/general-info",
+        "derivatives/coin-margined-futures/common-definition",
+        "derivatives/coin-margined-futures/error-code",
+        
         "derivatives/coin-margined-futures/trade/rest-api",
         "derivatives/coin-margined-futures/trade/rest-api/Place-Multiple-Orders",
         "derivatives/coin-margined-futures/trade/rest-api/Modify-Order",
@@ -78,6 +84,6 @@ impl CoinMRestPrivate {
         "derivatives/coin-margined-futures/account/rest-api/Get-BNB-Burn-Status",
     ];
 
-    const OUTPUT_FILE: &'static str = "binance/derivatives/binance_derivatives_coinm_private_api_docs.md";
+    const OUTPUT_FILE: &'static str = "binance/coinm/private_rest_api.md";
     const TITLE: &'static str = "Binance Derivatives COIN-M Private REST API Documentation";
 }

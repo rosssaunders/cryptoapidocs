@@ -1,15 +1,16 @@
 use std::error::Error;
 use async_trait::async_trait;
 use crate::exchanges::ApiProcessor;
-use crate::exchanges::doc_processor::DocProcessor;
+use crate::exchanges::binancecommon::doc_processor::DocProcessor;
 use cryptoapidocs_macros::ProcessorRegistration;
 
 #[derive(Default, ProcessorRegistration)]
-#[processor("binance_spot_fix")]
-pub struct BinanceSpotFix;
+#[processor("binancespot_fix")]
+#[exchange("binancespot")]
+pub struct Fix;
 
 #[async_trait]
-impl ApiProcessor for BinanceSpotFix {
+impl ApiProcessor for Fix {
     async fn process_docs(&self) -> Result<(u32, String, String), Box<dyn Error>> {
         let processor = DocProcessor::new(
             Self::ENDPOINTS,
@@ -24,17 +25,12 @@ impl ApiProcessor for BinanceSpotFix {
     }
 }
 
-impl BinanceSpotFix {
+impl Fix {
     const ENDPOINTS: &'static [&'static str] = &[
-        "binance-spot-api-docs/fix-api/general-info",
-        "binance-spot-api-docs/fix-api/connect",
-        "binance-spot-api-docs/fix-api/market-data",
-        "binance-spot-api-docs/fix-api/trading",
-        "binance-spot-api-docs/fix-api/account",
-        "binance-spot-api-docs/fix-api/errors",
+        "binance-spot-api-docs/fix-api",
     ];
 
-    const OUTPUT_FILE: &'static str = "binance/spot/binance_spot_fix_api_docs.md";
+    const OUTPUT_FILE: &'static str = "binance/spot/fix_api.md";
     const TITLE: &'static str = "Binance Spot FIX API Documentation";
 }
 

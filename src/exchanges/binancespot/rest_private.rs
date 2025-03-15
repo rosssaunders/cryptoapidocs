@@ -1,15 +1,16 @@
 use std::error::Error;
 use async_trait::async_trait;
 use crate::exchanges::ApiProcessor;
-use crate::exchanges::doc_processor::DocProcessor;
+use crate::exchanges::binancecommon::doc_processor::DocProcessor;
 use cryptoapidocs_macros::ProcessorRegistration;
 
 #[derive(Default, ProcessorRegistration)]
-#[processor("binance_spot_rest")]
-pub struct BinanceSpotRest;
+#[processor("binancespot_private_rest")]
+#[exchange("binancespot")]
+pub struct PrivateREST;
 
 #[async_trait]
-impl ApiProcessor for BinanceSpotRest {
+impl ApiProcessor for PrivateREST {
     async fn process_docs(&self) -> Result<(u32, String, String), Box<dyn Error>> {
         let processor = DocProcessor::new(
             Self::ENDPOINTS,
@@ -24,7 +25,7 @@ impl ApiProcessor for BinanceSpotRest {
     }
 }
 
-impl BinanceSpotRest {
+impl PrivateREST {
     const ENDPOINTS: &'static [&'static str] = &[
         "binance-spot-api-docs/filters",
         "binance-spot-api-docs/enums",
@@ -36,7 +37,6 @@ impl BinanceSpotRest {
         "binance-spot-api-docs/rest-api/data-sources",
         "binance-spot-api-docs/rest-api/endpoint-security-type",
         "binance-spot-api-docs/rest-api/general-endpoints",
-        "binance-spot-api-docs/rest-api/market-data-endpoints",
         "binance-spot-api-docs/rest-api/trading-endpoints",
         "binance-spot-api-docs/rest-api/account-endpoints",
         "binance-spot-api-docs/rest-api/user-data-stream",
@@ -44,6 +44,6 @@ impl BinanceSpotRest {
         "binance-spot-api-docs/rest-api/errors",
     ];
 
-    const OUTPUT_FILE: &'static str = "binance/spot/binance_spot_rest_api_docs.md";
-    const TITLE: &'static str = "Binance Spot REST API Documentation";
+    const OUTPUT_FILE: &'static str = "binance/spot/private_rest_api.md";
+    const TITLE: &'static str = "Binance Spot Private REST API Documentation";
 }

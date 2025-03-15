@@ -1,4 +1,12 @@
-pub mod binance_spot_rest;
-pub mod binance_spot_fix;
-pub mod binance_spot_websocket;
-pub mod binance_spot_sbe;
+pub mod rest_public;
+pub mod rest_private;
+pub mod fix;
+pub mod websocket_private;
+pub mod sbe;
+
+// Ensure processors are included in the binary
+pub use rest_public::*;
+pub use rest_private::*;
+pub use fix::*;
+pub use websocket_private::*;
+pub use sbe::*;

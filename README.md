@@ -1,27 +1,23 @@
 # Crypto API Documentation
 
-This repository contains documentation for various cryptocurrency exchange APIs. Below is a table of available documentation files:
+## Overview
+
+LLM friendly versions of Crypto Exchange Documentation. Each file is designed to fit within the context windows so analysts / developers / engineers working with these APIs can take full advantage of AI.
+
+## Docs
 
 | Exchange | API Type | Documentation | Last Updated | Token Count |
 |----------|----------|---------------|-------------|-------------|
-| Binance Spot | REST | [REST API Docs](docs/binance_spot_rest_api_docs.md) | 2025-03-14 | 3256 |
-| Binance Spot | FIX | [FIX API Docs](docs/binance_spot_fix_api_docs.md) | 2025-03-14 | 2094 |
-| Binance Spot | WebSocket | [WebSocket API Docs](docs/binance_spot_websocket_api_docs.md) | 2025-03-14 | 3741 |
-| Binance Spot | SBE | [SBE API Docs](docs/binance_spot_sbe_api_docs.md) | 2025-03-14 | 1015 |
-| Binance USDM | REST | binance_deriviatves_usdm_api_docs.md | 2025-03-14 | 79903 |
-
-## Overview
-
-This repository contains processed and formatted documentation for various cryptocurrency exchange APIs. The documentation is stored in Markdown format for easy reading and reference.
-
-## Getting Started
-
-To use these documentation files:
-
-1. Navigate to the `docs` directory
-2. Open the desired documentation file in your preferred Markdown viewer
-3. Use the table of contents (if available) to navigate to specific sections
+| Binance Spot | Private REST | [Private REST API Docs](docs/binance/spot/private_rest_api_docs.md) | 2025-03-14 | 37256 |
+| Binance Spot | Public REST | [Public REST API Docs](docs/binance/spot/public_rest_api_docs.md) | 2025-03-14 | 20126 |
+| Binance Spot | FIX | [FIX API Docs](docs/binance/spot/fix_api_docs.md) | 2025-03-14 | 28603 |
+| Binance Spot | Private WebSocket | [Private WebSocket API Docs](docs/binance/spot/private_websocket_api.md) | 2025-03-14 | 80754 |
+| Binance Spot | Market Data SBE | [SBE API Docs](docs/binance/spot/sbe_api.md) | 2025-03-14 | 1262 |
+| Binance USDM | Private REST | [Private REST Docs](docs/binance/usdm/private_rest.md) | 2025-03-14 | 79903 |
+| Binance USDM | Public REST | [Public REST Docs](docs/binance/usdm/public_rest.md) | 2025-03-14 | 79903 |
+| Binance CoinM | Private REST | [Private REST Docs](docs/binance/coinm/private_rest_api.md) | 2025-03-14 | 27982 |
+| Binance Coinm | Public REST | [Public REST Docs](docs/binance/coinm/public_rest_pai.md) | 2025-03-14 | 36940 |
 
 ## Contributing
 
-Feel free to submit issues and enhancement requests!
+Feel free to submit PRs for missing crypto venues.

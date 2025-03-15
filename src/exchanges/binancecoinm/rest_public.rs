@@ -1,15 +1,16 @@
 use std::error::Error;
 use async_trait::async_trait;
 use crate::exchanges::ApiProcessor;
-use crate::exchanges::doc_processor::DocProcessor;
+use crate::exchanges::binancecommon::doc_processor::DocProcessor;
 use cryptoapidocs_macros::ProcessorRegistration;
 
 #[derive(Default, ProcessorRegistration)]
-#[processor("binance_derivatives_coinm_public")]
-pub struct CoinMRestPublic;
+#[processor("binancecoinm_public_rest")]
+#[exchange("binancecoinm")]
+pub struct PublicREST;
 
 #[async_trait]
-impl ApiProcessor for CoinMRestPublic {
+impl ApiProcessor for PublicREST {
     async fn process_docs(&self) -> Result<(u32, String, String), Box<dyn Error>> {
         let processor = DocProcessor::new(
             Self::ENDPOINTS,
@@ -24,12 +25,12 @@ impl ApiProcessor for CoinMRestPublic {
     }
 }
 
-impl CoinMRestPublic {
+impl PublicREST {
     const ENDPOINTS: &'static [&'static str] = &[
         "derivatives/quick-start",
         "derivatives/coin-margined-futures/general-info",
-        "derivatives/coin-margined-futures/websocket-api-general-info",
         "derivatives/coin-margined-futures/common-definition",
+        "derivatives/coin-margined-futures/error-code",
 
         "derivatives/coin-margined-futures/market-data/rest-api",
         "derivatives/coin-margined-futures/market-data/rest-api/Check-Server-Time",
@@ -61,12 +62,8 @@ impl CoinMRestPublic {
         "derivatives/coin-margined-futures/market-data/rest-api/Composite-Index-Symbol-Information",
         "derivatives/coin-margined-futures/market-data/rest-api/Multi-Assets-Mode-Asset-Index",
         "derivatives/coin-margined-futures/market-data/rest-api/Index-Constituents",
-
-        "derivatives/coin-margined-futures/portfolio-margin-endpoints",
-        "derivatives/coin-margined-futures/faq/stp-faq",
-        "derivatives/coin-margined-futures/error-code"
     ];
 
-    const OUTPUT_FILE: &'static str = "binance/derivatives/binance_derivatives_coinm_public_api_docs.md";
+    const OUTPUT_FILE: &'static str = "binance/coinm/public_rest_api.md";
     const TITLE: &'static str = "Binance Derivatives COIN-M Public REST API Documentation";
 }
