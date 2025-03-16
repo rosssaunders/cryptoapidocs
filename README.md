@@ -29,6 +29,10 @@ LLM friendly versions of Crypto Exchange Documentation. Each file is designed to
 | ByBit V5 | Public REST | [Public REST Docs](docs/bybit/v5/public_rest_api.md) | 2025-03-15 |
 | ByBit V5 | Private WebSocket | [Private WebSocket Docs](docs/bybit/v5/private_websocket_api.md) | 2025-03-15 |
 | ByBit V5 | Public WebSocket | [Public WebSocket Docs](docs/bybit/v5/public_websocket_api.md) | 2025-03-15 |
+| OKX | Private Order Book REST | [Private Order Book REST Docs](docs/okx/private_order_book_trading_rest_api.md) | 2025-03-15 |
+| OKX | Private Order Book WebSocket | [Private Order Book WebSocket Docs](docs/okx/private_order_book_trading_websocket_api.md) | 2025-03-15 |
+| OKX | Public Market Data REST | [Public Market Data REST](docs/okx/public_market_data_rest_api.md) | 2025-03-15 |
+| OKX | Public Market Data WebSocket | [Public Market Data WebSocket REST ](docs/okx/public_market_data_websocket_api.md) | 2025-03-15 |
 
 ## Contributing
 
