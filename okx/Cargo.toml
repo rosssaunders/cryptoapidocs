@@ -1,0 +1,11 @@
+[package]
+name = "okx-docs-extractor"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+kuchiki = "0.8.1"
+reqwest = { version = "0.12.14", features = ["blocking"] }
+html2md = "0.2.14"
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"

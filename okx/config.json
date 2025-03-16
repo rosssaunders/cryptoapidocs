@@ -1,0 +1,149 @@
+{
+  "url": "https://www.okx.com/docs-v5/en/#overview",
+  "configs": {
+    "Private Order Book Trading REST API": {
+      "sections": [
+        {
+          "h1_match": "overview",
+          "h2_match": "overview-rest-authentication",
+          "h3_matches": [ "overview-rest-authentication-" ],
+          "include_h2_html": false
+        },
+        {
+          "h1_match": "error-code",
+          "h2_match": "error-code-rest-api",
+          "h3_matches": [ 
+            "error-code-rest-api-public"
+          ],
+          "include_h2_html": false
+        },
+        {
+          "h1_match": "overview",
+          "h2_match": "overview-production-trading-services",
+          "h3_matches": [ "overview-production-trading-services" ],
+          "include_h2_html": true
+        },
+        {
+          "h1_match": "overview",
+          "h2_match": "overview-demo-trading-services",
+          "h3_matches": [ "overview-demo-trading-services-" ],
+          "include_h2_html": true
+        },
+        {
+          "h1_match": "overview",
+          "h2_match": "overview-general-info",
+          "h3_matches": [ "overview-general-info-" ],
+          "include_h2_html": true
+        },
+        {
+          "h1_match": "overview",
+          "h2_match": "overview-transaction-timeouts",
+          "h3_matches": [ "overview-transaction-timeouts-rest-api" ],
+          "include_h2_html": true
+        },
+        {
+          "h1_match": "overview",
+          "h2_match": "overview-rate-limits",
+          "h3_matches": [ "overview-rate-limits-" ],
+          "include_h2_html": true
+        },
+        {
+          "h1_match": "trading-account",
+          "h2_match": "trading-account-rest-api",
+          "h3_matches": [ "trading-account-rest-api" ],
+          "include_h2_html": false
+        },
+        {
+          "h1_match": "order-book-trading",
+          "h2_match": "order-book-trading-trade",
+          "h3_matches": [ "order-book-trading-trade-post", "order-book-trading-trade-get" ],
+          "include_h2_html": false
+        },
+        {
+          "h1_match": "order-book-trading",
+          "h2_match": "order-book-trading-market-data",
+          "h3_matches": [ "order-book-trading-market-data-get" ],
+          "include_h2_html": false
+        }
+      ],
+      "output_file": "private_order_book_trading_rest_api.md"
+    },
+    "Private Orderbook Trading WebSocket API": {
+      "sections": [
+        {
+          "h1_match": "overview",
+          "h2_match": "overview-websocket",
+          "h3_matches": [ "overview-websocket-" ],
+          "include_h2_html": false
+        },
+        {
+          "h1_match": "error-code",
+          "h2_match": "error-code-websocket",
+          "h3_matches": [ 
+            "error-code-websocket-public"
+          ],
+          "include_h2_html": false
+        },
+        {
+          "h1_match": "overview",
+          "h2_match": "overview-production-trading-services",
+          "h3_matches": [ "overview-production-trading-services" ],
+          "include_h2_html": true
+        },
+        {
+          "h1_match": "overview",
+          "h2_match": "overview-demo-trading-services",
+          "h3_matches": [ "overview-demo-trading-services-" ],
+          "include_h2_html": true
+        },
+        {
+          "h1_match": "trading-account",
+          "h2_match": "trading-account-websocket",
+          "h3_matches": [ "trading-account-websocket-" ],
+          "include_h2_html": false
+        },
+        {
+          "h1_match": "order-book-trading",
+          "h2_match": "order-book-trading-trade",
+          "h3_matches": [ "order-book-trading-trade-ws" ],
+          "include_h2_html": false
+        },
+        {
+          "h1_match": "order-book-trading",
+          "h2_match": "order-book-trading-market-data",
+          "h3_matches": [ "order-book-trading-market-data-ws" ],
+          "include_h2_html": false
+        }
+      ],
+      "output_file": "private_order_book_trading_websocket_api.md"
+    },
+    "Public Market Data REST API": {
+      "sections": [
+        {
+          "h1_match": "public-data",
+          "h2_match": "public-data-rest-api",
+          "h3_matches": [ "public-data-rest-api-" ],
+          "include_h2_html": false
+        }
+      ],
+      "output_file": "public_market_data_rest_api.md"
+    },
+    "Public Market Data WebSocket API": {
+      "sections": [
+        {
+          "h1_match": "overview",
+          "h2_match": "overview-websocket",
+          "h3_matches": [ "overview-websocket-" ],
+          "include_h2_html": false
+        },
+        {
+          "h1_match": "public-data",
+          "h2_match": "public-data-websocket",
+          "h3_matches": [ "public-data-websocket-" ],
+          "include_h2_html": false
+        }
+      ],
+      "output_file": "public_market_data_websocket_api.md"
+    }
+  }
+}
