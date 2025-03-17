@@ -1,0 +1,18 @@
+{
+  "name": "cryptoapidocs",
+  "version": "1.0.0",
+  "description": "A project to process and clean up cryptocurrency API documentation.",
+  "main": "index.js",
+  "scripts": {
+    "parse-markdown": "node scripts/parse_markdown.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "unified": "^10.1.2",
+    "remark-parse": "^10.0.1",
+    "remark-stringify": "^10.0.1",
+    "remark-rehype": "^10.1.0",
+    "rehype-format": "^4.0.0"
+  }
+}
