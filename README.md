@@ -44,3 +44,25 @@ Adding each Doc into Cursor is currently a manual process and is unfortunately t
 is tracked here: https://forum.cursor.com/t/feature-request-bulk-documentation-import-for-cursor-ai/47539
 
 Once this feature is available in Cursor, I'll add support for adding the docs into this repo.
+
+## Running the Markdown Cleanup Script
+
+To clean up the markdown files in the `docs` directory using the `unifiedjs` script, follow these steps:
+
+### Install Dependencies
+
+First, make sure you have Node.js installed. Then, install the required dependencies by running:
+
+```bash
+npm install
+```
+
+### Run the Script
+
+To run the script and clean up the markdown files, use the following command:
+
+```bash
+npm run parse-markdown
+```
+
+This will execute the `parse_markdown.js` script located in the `scripts` directory and clean up the markdown files in the `docs` directory.
